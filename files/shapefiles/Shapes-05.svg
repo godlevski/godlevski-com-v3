@@ -1,0 +1,13 @@
+<svg id="ee907995-98fc-4b0b-a959-f6e912990561" data-name="Layer 10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="560" height="400" viewBox="0 0 560 400">
+  <defs>
+    <linearGradient id="a7ace5a1-bc44-4b2a-94a1-b87f647207fc" x1="200.02" y1="161.29" x2="280.02" y2="161.29" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#004a69" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <polygon id="a05bb289-a681-4f6b-a084-07edc54e84fb" data-name="shape" points="200.02 1.29 200.02 321.29 280.02 241.27 280.02 79.95 200.02 1.29" fill-opacity="0.3" fill="url(#a7ace5a1-bc44-4b2a-94a1-b87f647207fc)"/>
+  <polygon id="e8ab4741-0d66-4cc2-8099-e664675ff4c2" data-name="shape" points="200.02 1.29 200.02 321.29 280.02 241.27 280.02 79.95 200.02 1.29" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="0.25"/>
+  <path d="M-.43,159.94c120,0-13.86,44.88,106.11,43.27" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="0.25"/>
+  <path d="M105.68,203.21c96.65,0,54.27,36.76,93.89-4.27,9.56-9.9,16.68-16.94,40-38.65,153.55-142.89,21.59-54,175.14-54" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="0.25"/>
+  <path d="M414.71,106.26c153.55-2.06-7.78,54.94,145.77,54.94" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="0.25"/>
+</svg>

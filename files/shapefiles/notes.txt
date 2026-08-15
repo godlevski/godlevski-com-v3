@@ -1,0 +1,5 @@
+# 
+replace
+^(\s*).*\sd="([^\"]+)".*$
+with 
+$1{\n$1  string:"$2",\n$1  weights:[],\n$1  attrs:{},\n$1},
