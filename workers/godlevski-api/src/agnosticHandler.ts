@@ -5,6 +5,9 @@ import {
 import { HttpError } from '@godlevski/agnostic-lambda/classes';
 import { handleErrorResponse, log, logError } from '@godlevski/agnostic-lambda/helpers';
 import { healthController } from './controllers/healthController';
+import { introDataGetController } from './controllers/introDataGetController';
+import { tagsIndexGetController } from './controllers/tagsIndexGetController';
+import { slidesGetController } from './controllers/slidesGetController';
 import { helloRouter } from './routers/helloRouter';
 
 // this is a platform agnostic handler entry point
@@ -19,6 +22,16 @@ export const agnosticHandler = async (event: AgnosticEvent): Promise<AgnosticOut
     switch (event.paths[0]) {
       case 'health':
         response = await healthController(event);
+        break;
+      // api routes are kebab-case
+      case 'intro-data':
+        response = await introDataGetController(event);
+        break;
+      case 'tags-index':
+        response = await tagsIndexGetController(event);
+        break;
+      case 'slides':
+        response = await slidesGetController(event);
         break;
       case 'hello':
         response = await helloRouter(event);

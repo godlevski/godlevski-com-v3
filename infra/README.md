@@ -15,30 +15,22 @@ Cloudflare resources for godlevski.com v3. All provisioning goes through `wrangl
 
 ## First-time setup
 
-Two equivalent paths to provision — pick one:
-
-**A. terraform (source of truth going forward)** — `brew install terraform`
+Provisioning is **terraform-exclusive** (`brew install terraform`) — wrangler never creates
+resources, it only deploys code and data into what terraform made.
 
 ```sh
 cd infra/terraform
 cp terraform.tfvars.example terraform.tfvars   # fill in account_id
 export CLOUDFLARE_API_TOKEN=...                # token with R2:Edit + D1:Edit
-terraform init && terraform apply              # buckets + d1; outputs godlevski_db_id
+pnpm provision                                 # terraform init + apply (from repo root)
 ```
 
-**B. wrangler quick path**
+Then:
 
 ```sh
-wrangler login
-pnpm provision                  # creates buckets + d1 (from repo root)
-```
-
-Then either way:
-
-```sh
-# paste the database_id into workers/godlevski-api/wrangler.jsonc
+# paste the godlevski_db_id output into workers/godlevski-api/wrangler.jsonc
 pnpm db:migrate:remote          # apply infra/migrations/godlevski-db to remote D1
-pnpm db:migrate:local           # same, against local miniflare sqlite (for dev)
+pnpm db:migrate:local           # same, against local/godlevski-db.sqlite (for dev)
 ```
 
 Worker code always deploys via wrangler (not terraform); terraform additionally holds
@@ -52,7 +44,10 @@ pnpm deploy:worker:r2           # wrangler deploy godlevski-r2
 pnpm deploy:worker:art-r2       # wrangler deploy art-godlevski-r2
 pnpm deploy:fe:godlevski        # rsbuild build + upload to r2://godlevski-web
 pnpm deploy:fe:art-godlevski    # rsbuild build + upload to r2://art-godlevski-web
+pnpm files:sync:remote          # push files/ to r2://godlevski-files
 ```
+
+(shell scripts live in `scripts/` at repo root)
 
 ## Migrations
 

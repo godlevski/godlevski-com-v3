@@ -4,7 +4,7 @@ import { introDataResponseSchema, IntroDataResponse } from '@godlevski/schemas/c
 import { introData } from '../data/introData';
 
 // GET /api/introData — intro slides for the frontend (shapefile refs + copy)
-export const introDataController = async (_event: AgnosticEvent): Promise<AgnosticOutput> => {
+export const introDataGetController = async (_event: AgnosticEvent): Promise<AgnosticOutput> => {
   const json: IntroDataResponse = introDataResponseSchema.parse({
     status: 'success',
     data: introData,
