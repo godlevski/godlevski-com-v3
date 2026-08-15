@@ -8,7 +8,9 @@
   "exports": {
     "./event": "./event/index.ts",
     "./classes": "./classes/index.ts",
-    "./helpers": "./helpers/index.ts"
+    "./helpers": "./helpers/index.ts",
+    "./helpers/*": "./helpers/*.ts",
+    "./d1Shim": "./d1Shim/index.ts"
   },
   "scripts": {
     "lint": "tsc --noEmit"
@@ -18,6 +20,7 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/node": "^22.15.14",
     "typescript": "^5.9.2"
   }
 }

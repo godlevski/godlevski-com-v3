@@ -1,4 +1,4 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["event", "classes", "helpers"]
+  "include": ["event", "classes", "helpers", "d1Shim"]
 }
