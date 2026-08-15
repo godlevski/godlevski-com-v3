@@ -16,9 +16,11 @@ packages/
   agnostic-lambda/  platform-agnostic request handling (worker + express mappers)
   schemas/          zod schema per controller — shared api contract (worker validates, FE infers types)
   r2-static/        shared R2 static serving (SPA fallback, content types, cache headers)
-infra/              terraform (exclusive provisioning path) + D1 migrations
-scripts/            deploy/sync shell scripts
-local/              local dev databases (gitignored; regenerate via db:migrate:local)
+infra/              terraform (exclusive provisioning path) + D1 schema migrations
+seeds/              per-site content bootstrap: db prefill SQL (tracked) + slide
+                    originals (gitignored — the bucket is their home)
+scripts/            deploy/sync/migrate scripts
+local/              local dev databases (gitignored; regenerate via migrate+seed)
 local-runner.ts     dev reverse proxy: one origin per site
 ```
 
@@ -32,10 +34,15 @@ Locally the api runs on **express** (`test-runner.ts` — proves the agnostic pa
 
 ```sh
 pnpm install
-pnpm db:migrate:local     # seed local sqlite (miniflare)
-pnpm files:sync:local     # seed local R2 from files/ (one-time-ish)
+pnpm db:migrate:local     # schema -> local/godlevski-db.sqlite
+pnpm db:seed:local        # content bootstrap (slides rows)
+pnpm files:sync:local     # files/ + seeds/godlevski/files/ -> local R2
 pnpm dev
 ```
+
+Migrations are schema only; content lives in `seeds/` and is applied separately
+(`db:seed:local` / `db:seed:remote`). Slide original images are gitignored seed
+content — on a fresh machine they come from the bucket or the v2.1 archive.
 
 | origin | site | workers |
 |---|---|---|

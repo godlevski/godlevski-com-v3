@@ -7,7 +7,9 @@
   "private": true,
   "exports": {
     ".": "./controllers/index.ts",
-    "./controllers/*": "./controllers/*.ts"
+    "./controllers/*": "./controllers/*.ts",
+    "./database": "./database/index.ts",
+    "./database/*": "./database/*.ts"
   },
   "scripts": {
     "lint": "tsc --noEmit"

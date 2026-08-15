@@ -14,9 +14,6 @@ dist/
 .env.*.local
 .env.production
 
-# generated slide image cache (derivatives regenerate; originals are tracked)
-files/slides/cache/
-
 # local dev databases at repo root only (regenerate via pnpm db:migrate:local)
 /local/
 

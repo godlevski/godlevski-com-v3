@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "rsbuild dev --env-mode ${ENV_MODE:-development}",
-    "build": "rsbuild build --env-mode ${ENV_MODE:-production}",
+    "build": "ENV_MODE=${ENV_MODE:-production} rsbuild build --env-mode ${ENV_MODE:-production}",
     "build:dev": "ENV_MODE=development pnpm build",
     "build:prod": "ENV_MODE=production pnpm build",
     "preview": "rsbuild preview",

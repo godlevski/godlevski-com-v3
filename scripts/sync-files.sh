@@ -31,12 +31,22 @@ content_type() {
 }
 
 cd "$WORKER_DIR"
-COUNT=0
-echo "== syncing $FILES_DIR -> r2://$BUCKET ($MODE) =="
-find "$FILES_DIR" -type f ! -name ".DS_Store" | while read -r file; do
-  key="${file#"$FILES_DIR"/}"
-  ct="$(content_type "$file")"
-  echo "  put $key ($ct)"
-  wrangler r2 object put "$BUCKET/$key" --file "$file" --content-type "$ct" "--$MODE" > /dev/null 2>&1
-done
+
+# two content roots, same bucket key-space:
+#   files/                 hand-authored site assets (shapefiles, assorted)
+#   seeds/godlevski/files/ seed content (slide originals; gitignored, bucket is home)
+sync_tree() {
+  local root="$1"
+  [ -d "$root" ] || { echo "  (skip $root — not present on this machine)"; return; }
+  find "$root" -type f ! -name ".DS_Store" | while read -r file; do
+    key="${file#"$root"/}"
+    ct="$(content_type "$file")"
+    echo "  put $key ($ct)"
+    wrangler r2 object put "$BUCKET/$key" --file "$file" --content-type "$ct" "--$MODE" > /dev/null 2>&1
+  done
+}
+
+echo "== syncing files/ + seeds/files/ -> r2://$BUCKET ($MODE) =="
+sync_tree "$FILES_DIR"
+sync_tree "$REPO_ROOT/seeds/godlevski/files"
 echo "== done =="

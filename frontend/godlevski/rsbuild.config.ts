@@ -1,7 +1,10 @@
 import { defineConfig, loadEnv } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 
-const { parsed: { PORT, PROXY_PORT, PUBLIC_URL } } = loadEnv({ prefixes: ['PUBLIC_'] });
+// .env < .env.local < .env.[mode] < .env.[mode].local — mode from ENV_MODE
+// (root dev script / build:prod set it), falling back to NODE_ENV
+const mode = process.env.ENV_MODE || process.env.NODE_ENV || 'development';
+const { publicVars, rawPublicVars, parsed: { PORT, PROXY_PORT, PUBLIC_URL } } = loadEnv({ mode, prefixes: ['PUBLIC_'] });
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 export default defineConfig({
@@ -26,10 +29,12 @@ export default defineConfig({
   source: {
     define: {
       // CRA-era code references bare `process` (process && process.env?.NODE_ENV);
-      // most-specific define wins, the bare one backstops the rest
+      // most-specific define wins, the bare one backstops the rest.
+      // PUBLIC_* vars ride in for backend.settings.js
+      ...publicVars,
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-      'process.env': JSON.stringify({ NODE_ENV }),
-      'process': JSON.stringify({ env: { NODE_ENV } }),
+      'process.env': JSON.stringify({ NODE_ENV, ...rawPublicVars }),
+      'process': JSON.stringify({ env: { NODE_ENV, ...rawPublicVars } }),
     },
     entry: {
       index: './src/index.js',
