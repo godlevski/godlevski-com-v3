@@ -36,8 +36,13 @@ second machine, move state to an R2 backend first (see comment in `terraform/mai
 
 Then:
 
+Resource ids flow from terraform automatically: apply writes
+`infra/generated/cloudflare-ids.json` (tracked), and `pnpm infra:sync-ids` — chained onto
+`pnpm provision` — patches worker `wrangler.jsonc` files from it. No hand-pasting.
+
+Then:
+
 ```sh
-# paste the godlevski_db_id output into workers/godlevski-api/wrangler.jsonc
 pnpm db:migrate:remote          # apply infra/migrations/godlevski-db to remote D1
 pnpm db:migrate:local           # same, against local/godlevski-db.sqlite (for dev)
 ```
@@ -48,13 +53,19 @@ commented-out route wiring in `terraform/dns.tf` for when the domains point at t
 ## Deploys
 
 ```sh
+pnpm deploy:all                 # everything below, in order (workers then frontends)
+
 pnpm deploy:worker:api          # wrangler deploy godlevski-api
+pnpm deploy:worker:files        # wrangler deploy godlevski-files
 pnpm deploy:worker:r2           # wrangler deploy godlevski-r2
 pnpm deploy:worker:art-r2       # wrangler deploy art-godlevski-r2
 pnpm deploy:fe:godlevski        # rsbuild build + upload to r2://godlevski-web
 pnpm deploy:fe:art-godlevski    # rsbuild build + upload to r2://art-godlevski-web
-pnpm files:sync:remote          # push files/ to r2://godlevski-files
+pnpm files:sync:remote          # push files/ + seeds/*/files to r2://godlevski-files
 ```
+
+Data ops stay deliberate (not part of deploy:all): `db:migrate:remote`, `db:seed:remote`,
+`files:sync:remote`.
 
 (shell scripts live in `scripts/` at repo root)
 

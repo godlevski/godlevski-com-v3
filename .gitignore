@@ -17,6 +17,9 @@ dist/
 # local dev databases at repo root only (regenerate via pnpm db:migrate:local)
 /local/
 
+#terraform
+infra/generated
+
 # misc
 .DS_Store
 *.log
