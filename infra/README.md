@@ -20,10 +20,19 @@ resources, it only deploys code and data into what terraform made.
 
 ```sh
 cd infra/terraform
-cp terraform.tfvars.example terraform.tfvars   # fill in account_id
-export CLOUDFLARE_API_TOKEN=...                # token with R2:Edit + D1:Edit
+cp terraform.tfvars.example terraform.tfvars   # fill in account_id (`wrangler whoami`)
+cp .env.example .env                           # fill in CLOUDFLARE_API_TOKEN (both gitignored)
+source .env                                    # per-shell; re-run in new terminals
 pnpm provision                                 # terraform init + apply (from repo root)
 ```
+
+The token is a **scoped API token** (dash → My Profile → API Tokens → Create Custom Token),
+not the legacy Global API Key. Current scopes: Account → Workers R2 Storage: Edit,
+Account → D1: Edit. When `terraform/dns.tf` gets uncommented, add Zone → Workers Routes: Edit
+and Zone → DNS: Edit scoped to godlevski.com.
+
+Terraform state (`terraform.tfstate`) is local and gitignored; if this ever runs from a
+second machine, move state to an R2 backend first (see comment in `terraform/main.tf`).
 
 Then:
 
