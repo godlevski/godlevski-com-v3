@@ -111,15 +111,23 @@ export const slidesController = async (
       .output({ format: OUTPUT_MIME[ext] as ImageOutputOptions['format'], quality });
 
     const response = result.response();
+    // images pipeline errors (5xx hiccups) must NOT pass through verbatim —
+    // degrade to the original instead
+    if (!response.ok) {
+      throw new Error(`images pipeline returned ${response.status}`);
+    }
     const headers = new Headers(response.headers);
     headers.set('cache-control', 'public, max-age=31536000, immutable');
     return new Response(response.body, { status: response.status, headers });
   } catch (e) {
-    // transform failed (unsupported op locally, corrupt file, ...) ->
-    // degrade to the original rather than a broken image
+    // transform failed (pipeline error, unsupported op, corrupt file, ...) ->
+    // degrade to the original rather than a broken image. Short cache only:
+    // a long-cached fallback would pin the unresized original after recovery.
     console.error(`[slidesController] transform failed for ${key}: ${String((e as Error).message)}`);
     const fallback = await env.FILES.get(key);
     if (!fallback) return new Response('not found', { status: 404 });
-    return new Response(fallback.body, { headers: baseHeaders });
+    const headers = new Headers(baseHeaders);
+    headers.set('cache-control', 'public, max-age=60');
+    return new Response(fallback.body, { headers });
   }
 };

@@ -12,12 +12,22 @@ const withCors = (response: Response): Response => {
 };
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: CORS_HEADERS });
     }
     if (request.method !== 'GET' && request.method !== 'HEAD') {
       return withCors(new Response('method not allowed', { status: 405 }));
+    }
+
+    // edge cache — the successor of v2.1's cache/ dir: transformed
+    // derivatives are served from cloudflare's cache on repeat requests
+    // instead of re-reading R2 + re-transforming (also what keeps the
+    // free-plan CPU budget comfortable)
+    const cache = caches.default;
+    if (request.method === 'GET') {
+      const cached = await cache.match(request);
+      if (cached) return cached;
     }
 
     const url = new URL(request.url);
@@ -48,6 +58,10 @@ export default {
     if (request.method === 'HEAD') {
       response = new Response(null, { status: response.status, headers: response.headers });
     }
-    return withCors(response);
+    response = withCors(response);
+    if (request.method === 'GET' && response.status === 200) {
+      ctx.waitUntil(cache.put(request, response.clone()));
+    }
+    return response;
   }
 } satisfies ExportedHandler<Env>;
