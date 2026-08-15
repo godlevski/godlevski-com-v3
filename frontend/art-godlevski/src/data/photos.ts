@@ -6,7 +6,11 @@ import { Photo } from '../types';
 // Works without a file yet have src: '' and are excluded from the gallery.
 // ---------------------------------------------------------------------------
 
-export const photos: Photo[] = [
+// images are served by the shared files worker: same-origin /files/* locally
+// (dev proxy), https://files.godlevski.com in production (PUBLIC_FILES_BASE)
+const filesBase = process.env.PUBLIC_FILES_BASE || '';
+
+const photosData: Photo[] = [
   {
     id: 'intraverses_01',
     src: '/files/slides/intraverses_01.jpg',
@@ -585,3 +589,8 @@ export const photos: Photo[] = [
     haiku: [],
   },
 ].filter(p => p.src !== '');
+
+export const photos: Photo[] = photosData.map(photo => ({
+  ...photo,
+  src: filesBase + photo.src,
+}));

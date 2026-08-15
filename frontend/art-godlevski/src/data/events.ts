@@ -61,4 +61,9 @@ export const events: ArtEvent[] = [
     title: 'Fulton Street Collective',
     dateStart: '2025-08-01',
   },
+  {
+    id: 'e6',
+    title: 'Starline Factory, Harvard IL',
+    dateStart: '2026-06-14',
+  },
 ];
