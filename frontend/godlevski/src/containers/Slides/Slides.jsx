@@ -67,8 +67,10 @@ export default () => {
   }
 
   // load slides if empty
-  useEffect(async function getSlidesIfEmpty(){
-    
+  // react 19: effects must not be async (returned promise would be treated
+  // as the cleanup fn) — async work runs in an IIFE inside a sync effect
+  useEffect(function getSlidesIfEmpty(){ (async () => {
+
     if(!slidesKnot.state){
       messageKnot.setState('Loading slides');
 
@@ -84,7 +86,7 @@ export default () => {
       indexData()
     }
 
-  }, [])
+  })(); }, [])
 
   function indexData(){
     //console.log('slides data', slidesKnot.state);

@@ -18,7 +18,8 @@ export default ({children}) => {
   const [tagsIndex, setTagsIndex] = useHot(tagsIndexKnot);
   const [transpiledData, setTranspiledData] = useState({})
   
-  useEffect(async function getDataIfEmpty(){
+  // react 19: effects must not be async (this one never awaited anyway)
+  useEffect(function getDataIfEmpty(){
     if(!slides || !tagsIndex){
       messageKnot.setState('Loading data.');
     }

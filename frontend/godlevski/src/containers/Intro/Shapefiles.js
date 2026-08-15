@@ -1,5 +1,5 @@
 //import data from "../../temp/sample_intro_data.js";
-import {useRef, useEffect, useState} from "react";
+import {useRef, useEffect, useLayoutEffect, useState} from "react";
 
 import axios from "axios";
 
@@ -42,7 +42,9 @@ function Slides({
     const {data} = res;
 
     if(res.status == 200){
-      loadedFiles.current[filename] = {...data, id: UID(), stagedId: Date.now()}
+      // stagedId is a react key — Date.now() collided when files loaded
+      // within the same millisecond (duplicate keys => doubled slides)
+      loadedFiles.current[filename] = {...data, id: UID(), stagedId: UID()}
     }
     else {
       loadedFiles.current[filename] = undefined;
@@ -52,7 +54,8 @@ function Slides({
   }
 
   // preload current file
-  useEffect(async function preloadCurrentFile(){
+  // react 19: effects must not be async — async work runs in an IIFE
+  useEffect(function preloadCurrentFile(){ (async () => {
 
     const filename = shapefiles[slideI];
 
@@ -63,13 +66,13 @@ function Slides({
     //console.log('current file has loaded', loadedFiles);
 
     setLoaded(new Date());
-    
-  }, [slideI]);
+
+  })(); }, [slideI]);
 
   // preload all unpreloaded files
   // async files preloader, invoked on shapefiles array change
-  useEffect(async function preloadAllFiles(){
-    
+  useEffect(function preloadAllFiles(){ (async () => {
+
     async function loadNext(i){
       const filename = shapefiles[i];
 
@@ -100,7 +103,7 @@ function Slides({
 
     setLoaded(new Date());
 
-  },[shapefiles]);
+  })(); },[shapefiles]);
 
   // ANIMATION OFFSET VALUE 
   // offset value of start of current element to the end of the window
@@ -184,12 +187,20 @@ function Slides({
   }));
 
   function clearQueque(soft=false){
-    mainOffsetApi.set({x: 0, x1: startToEndOffset.current});
-    if(soft) return;
+    if(soft){
+      mainOffsetApi.set({x: 0, x1: startToEndOffset.current});
+      return;
+    }
+    // hard clear: state only — the spring snap-back happens in the layout
+    // effect below AFTER the shorter queue commits. Snapping here (react
+    // 18+/19 batches the setState from spring's onRest) painted the old pair
+    // at x:0 for a frame -> previous shapefile flickered at animation end
     setShapefilesQueue([ shapefilesQueue[shapefilesQueue.length-1] ])
   }
 
-  useEffect(function animateSlides(){
+  // layout effect: spring position and queue state must change within the
+  // same paint (see clearQueque)
+  useLayoutEffect(function animateSlides(){
 
     const queueLength = shapefilesQueue.length;
 
@@ -207,6 +218,9 @@ function Slides({
         x: -startToEndOffset.current,
         x1: 0
       });
+    }
+    else {
+      mainOffsetApi.set({x: 0, x1: startToEndOffset.current});
     }
 
   }, [shapefilesQueue])

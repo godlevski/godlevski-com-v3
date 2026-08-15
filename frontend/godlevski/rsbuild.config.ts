@@ -28,13 +28,12 @@ export default defineConfig({
   },
   source: {
     define: {
-      // CRA-era code references bare `process` (process && process.env?.NODE_ENV);
-      // most-specific define wins, the bare one backstops the rest.
-      // PUBLIC_* vars ride in for backend.settings.js
+      // most-specific define wins; PUBLIC_* vars ride in for backend.settings.js.
+      // NO bare `process` define — it would poison library code (react 19
+      // internals reference process.emit)
       ...publicVars,
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
       'process.env': JSON.stringify({ NODE_ENV, ...rawPublicVars }),
-      'process': JSON.stringify({ env: { NODE_ENV, ...rawPublicVars } }),
     },
     entry: {
       index: './src/index.js',

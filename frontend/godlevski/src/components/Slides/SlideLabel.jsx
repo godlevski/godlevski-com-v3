@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from "react";
+import React, {useRef, useEffect, useState, useMemo} from "react";
 
 import SvgIcon from "../SvgIcon/SvgIcon.jsx";
 import styles from "./SlideLabel.module.css";
@@ -13,13 +13,18 @@ import UID from "../../utils/UID.js";
 
 export const LabelContainer = ({id, children, expanded}) => {
 
+  // React 19 removed findDOMNode, so react-transition-group needs an explicit
+  // nodeRef — one per keyed child (the exiting clone keeps its own old ref)
+  const nodeRef = useMemo(() => React.createRef(), [id]);
+
   return (
     <SwitchTransition mode="out-in">
       <CSSTransition
         appear
         key={id}
+        nodeRef={nodeRef}
         timeout={100}
-        addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
+        addEndListener={(done) => nodeRef.current && nodeRef.current.addEventListener("transitionend", done, false)}
         classNames={{
            //appear: styles['appear'],
            //appearActive: styles['appear-active'],
@@ -33,12 +38,12 @@ export const LabelContainer = ({id, children, expanded}) => {
           }}
         >
 
-        <div className={styles.labelContainer}>
+        <div ref={nodeRef} className={styles.labelContainer}>
           <div className={styles.labelBody+" "+(expanded?styles.expanded:"")}>
-            
+
             {children}
-            
-          </div> 
+
+          </div>
         </div>
 
       </CSSTransition>

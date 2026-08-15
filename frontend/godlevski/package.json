@@ -13,14 +13,14 @@
     "clear-cache": "rm -rf node_modules/.cache"
   },
   "dependencies": {
-    "@react-spring/web": "9.3.0",
+    "@react-spring/web": "^10.0.3",
     "animated-scroll-to": "2.2.0",
     "axios": "0.25.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-router-dom": "6.2.1",
-    "react-spring": "9.3.0",
-    "react-transition-group": "4.4.2"
+    "react-spring": "^10.0.3",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@rsbuild/core": "^1.6.14",
