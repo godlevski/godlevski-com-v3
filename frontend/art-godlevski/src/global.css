@@ -1,0 +1,812 @@
+@import './variables.css';
+
+/* ── Fonts ────────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'tnlight';
+  src: url('./assets/fonts/tungsten-book-webfont.woff2') format('woff2'),
+       url('./assets/fonts/tungsten-book-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ── Reset & base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  background: var(--bg-indigo);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none; /* let canvas handle all touch */
+}
+
+/* ── Canvas ───────────────────────────────────────────────────────────────── */
+.gallery-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  cursor: grab;
+}
+
+/* ── Site header ──────────────────────────────────────────────────────────── */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 38px 48px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+/* Title — lives outside the header stacking context, always on top */
+.site-brand {
+  position: fixed;
+  top: 38px;
+  left: 48px;
+  z-index: 32;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+  padding: 10px 0;
+}
+
+/* Left column: view toggle, offset below the brand text */
+.site-identity {
+  display: flex;
+  flex-direction: column;
+  padding-top: 66px;   /* clears site-sub + site-motto + site-title heights */
+  pointer-events: none;
+}
+
+/* Primary: Intraverses */
+.site-sub {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+  line-height: 1;
+  background: rgba(1, 13, 21, 0.72);
+  padding: 4px 12px 4px 0;
+}
+
+/* Secondary: motto */
+.site-motto {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+  font-style: italic;
+  background: rgba(1, 13, 21, 0.72);
+  padding: 4px 12px 4px 0;
+}
+
+/* ── Site nav (right column, landscape only) ─────────────────────────────── */
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: auto;
+  margin-left: auto;
+  margin-top: 10px;
+}
+
+.nav-tab {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  cursor: pointer;
+  transition: color 0.18s;
+  line-height: 1.8;
+  text-align: right;
+}
+.nav-tab:hover   { color: var(--fg-muted); }
+.nav-tab--active { color: var(--fg); }
+
+/* ── Burger button (portrait only) — fixed above everything ─────────────── */
+.burger-btn {
+  display: none;
+  position: fixed;
+  top: 48px;
+  right: 32px;
+  z-index: 31;             /* above overlay (30) and header (20) */
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--fg-dim);
+  transition: color 0.18s;
+}
+.burger-btn:hover { color: var(--fg-muted); }
+
+/* ── Portrait slide-down menu overlay — above header ─────────────────────── */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;             /* above header (20), below burger (31) */
+  background: var(--bg-panel);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 120px 32px 40px;
+  transform: translateY(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.menu-overlay .nav-tab {
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-align: left;
+  line-height: 2.2;
+  color: var(--fg-muted);
+}
+.menu-overlay .nav-tab--active { color: var(--fg); }
+
+/* ── Page panels (non-gallery tabs) ──────────────────────────────────────── */
+.page-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  overflow-y: auto;
+  padding: 160px 48px 60px;
+}
+
+.page-placeholder {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--fg-dim);
+}
+
+.page-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  transition: opacity 0.2s;
+}
+.page-link:hover { opacity: 0.65; }
+
+/* ViewToggle anchor — fixed below the brand text in the top-left */
+.view-toggle-anchor {
+  position: fixed;
+  top: 138px;
+  left: 45px;
+  z-index: 21;
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .view-toggle-anchor {
+    top: 130px;
+    left: 20px;
+  }
+}
+
+/* View mode toggle (segmented control) */
+.view-toggle {
+  display: inline-flex;
+  align-self: flex-start;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+  pointer-events: auto;
+  background: var(--bg-indigo);
+}
+
+.vt-btn {
+  background: none;
+  border: none;
+  padding: 6px 9px;
+  cursor: pointer;
+  color: var(--fg-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, color 0.18s;
+}
+
+.vt-btn + .vt-btn {
+  border-left: 1px solid var(--border);
+}
+
+.vt-btn:hover   { color: var(--fg-muted); }
+.vt-btn--active { background: var(--surface); color: var(--fg); }
+
+/* Tertiary: attribution */
+.site-title {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  background: rgba(1, 13, 21, 0.72);
+  padding: 4px 12px 4px 0;
+}
+
+/* ── Preview overlay ──────────────────────────────────────────────────────── */
+.pv-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  outline: none;
+}
+
+/* Image wrapper — sized by JS during open animation, then by CSS */
+.pv-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80vw;
+  max-height: 85vh;
+}
+
+.pv-img {
+  display: block;
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+/* ── Info panel ───────────────────────────────────────────────────────────── */
+.pv-info {
+  position: fixed;
+  right: 48px;
+  bottom: 48px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+  pointer-events: none;
+}
+
+.pv-info.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.pv-haiku {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--fg);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pv-haiku span {
+  display: block;
+}
+
+.pv-meta {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pv-meta span:first-child {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.pv-edition {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.pv-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pv-link {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-decoration: none;
+  text-transform: lowercase;
+  transition: opacity 0.2s;
+}
+.pv-link:hover { opacity: 0.65; }
+
+.pv-link--copy {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.pv-link--cart {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.pv-link--cart-active {
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* ── Preview buttons ──────────────────────────────────────────────────────── */
+.pv-btn {
+  position: fixed;
+  background: none;
+  border: none;
+  color: var(--fg-muted);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  padding: 12px;
+  transition: color 0.2s, opacity 0.2s;
+  z-index: 101;
+}
+.pv-btn:hover  { color: var(--fg); }
+.pv-btn:disabled { opacity: 0.15; cursor: default; }
+
+.pv-btn--close { top: 24px;  right: 24px;  font-size: 28px; }
+.pv-btn--prev  { left: 24px; top: 50%; transform: translateY(-50%); }
+.pv-btn--next  { right: 24px; top: 50%; transform: translateY(-50%); }
+
+/* ── Toggle button (all screens) ─────────────────────────────────────────── */
+.pv-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  order: -2;
+  width: 100%;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--fg-muted);
+  padding: 0;
+  transition: color 0.2s;
+}
+.pv-toggle:hover { color: var(--fg); }
+
+.pv-toggle-icon {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px); /* ↓ chevron when expanded */
+  transition: transform 0.25s ease;
+}
+
+.pv-toggle-icon.up {
+  transform: rotate(-135deg) translate(-1px, -1px); /* ↑ chevron when collapsed */
+}
+
+/* ── Collapse: meta always visible, haiku+links hidden until expanded ──────── */
+.pv-meta { order: -1; }
+
+.pv-info:not(.expanded) .pv-haiku,
+.pv-info:not(.expanded) .pv-links {
+  display: none;
+}
+
+/* ── Persistent cart bar (toggle + inquire CTA) ───────────────────────────── */
+.sel-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 51;
+  height: var(--sel-bar-h);
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: stretch;
+}
+
+.sel-bar-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 16px;
+  background: none;
+  border: none;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--fg-dim);
+  flex-shrink: 0;
+  transition: color 0.18s, background 0.18s;
+}
+.sel-bar-toggle:hover { color: var(--fg-muted); }
+.sel-bar--open .sel-bar-toggle,
+.sel-bar-toggle--active {
+  background: var(--surface);
+  color: var(--fg);
+  opacity: 1;
+}
+
+.sel-bar-count {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  min-width: 10px;
+}
+
+/* Closed state — full-width hint */
+.sel-bar-hint {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: lowercase;
+  color: var(--fg-ghost);
+  pointer-events: none;
+}
+.sel-bar-hint--filled { color: var(--accent-dim); }
+
+.sel-bar-inquire {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  transition: background 0.2s;
+}
+.sel-bar-inquire:hover:not(:disabled) { color: var(--fg); }
+.sel-bar-inquire:disabled { background: var(--surface); color: var(--fg-ghost); cursor: default; }
+
+/* ── Selection list panel — slides up above the bar ──────────────────────── */
+.sel-panel {
+  position: fixed;
+  bottom: var(--sel-bar-h);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 87px;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sel-panel--open { transform: translateY(0); }
+
+/* Close button — tab protruding above the panel */
+.sel-panel-close {
+  position: absolute;
+  bottom: 100%;
+  right: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom: 1px solid var(--bg);
+  border-radius: 5px 5px 0 0;
+  padding: 10px 14px;
+  cursor: pointer;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+.sel-panel-close:hover { color: var(--fg); }
+
+/* Scrollable horizontal strip */
+.sel-list {
+  height: 86px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 16px;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+.sel-list::-webkit-scrollbar { display: none; }
+
+/* Empty state */
+.sel-empty {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--fg-dim);
+  white-space: nowrap;
+  padding: 0 8px;
+}
+
+.sel-empty--hint {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  opacity: 1;
+}
+
+/* Clear all button */
+.sel-clear {
+  flex-shrink: 0;
+  align-self: center;
+  margin-left: 8px;
+  padding: 4px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.sel-clear:hover { background: var(--border); }
+
+/* Individual selected-work card */
+.sel-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 10px;
+  flex-shrink: 0;
+  height: 66px;
+  padding-right: 20px;
+}
+
+.sel-item-img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sel-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-width: 72px;
+  max-width: 130px;
+}
+
+.sel-item-title {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+.sel-item-year {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+}
+
+.sel-item-edition {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+}
+
+.sel-item-remove {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  background: none;
+  border: none;
+  padding: 0 2px;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--fg-dim);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.sel-item-remove:hover { color: var(--fg-muted); }
+
+
+/* ── Artist statement ────────────────────────────────────────────────────── */
+.statement-body {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6em;
+}
+
+.statement-p {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--fg-soft);
+}
+
+/* ── Contact ─────────────────────────────────────────────────────────────── */
+.contact-body {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.contact-p {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--fg-soft);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+/* ── Zoom track tick buttons ─────────────────────────────────────────────── */
+.tick-btn {
+  transition: opacity 0.12s;
+}
+.tick-btn:hover {
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+/* ── Events list ─────────────────────────────────────────────────────────── */
+.events-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 560px;
+}
+
+.event-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.event-date {
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.75;
+}
+
+.event-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--fg);
+}
+
+.event-desc {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--fg-muted);
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* ── Prior Projects section ──────────────────────────────────────────────── */
+.projects-section {
+  margin-top: 72px;
+  padding-top: 36px;
+  border-top: 1px solid color-mix(in srgb, var(--fg-muted) 18%, transparent);
+}
+
+.projects-heading {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  opacity: 0.7;
+  margin-bottom: 32px;
+}
+
+.project-item {
+  opacity: 0.5;
+}
+
+.project-place {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+}
+
+/* ── Mobile / portrait ────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .site-header { padding: 32px 20px 18px; }
+  .site-brand  { top: 32px; left: 20px; }
+  .page-panel  { padding: 160px 20px 48px; }
+
+  /* Hide desktop nav, show burger */
+  .site-nav    { display: none; }
+  .burger-btn  { display: flex; }
+
+  /* Activate overlay (display:flex + slide-in class) */
+  .menu-overlay              { display: flex; }
+  .menu-overlay--open        { transform: translateY(0); }
+
+  .pv-img-wrap {
+    max-width: 100vw;
+    max-height: 85vh;
+  }
+
+  .pv-img { max-height: 85vh; }
+
+  /* Info panel: pinned to bottom, always visible */
+  .pv-info,
+  .pv-info.visible {
+    position: fixed;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 24px 32px;
+    background: linear-gradient(to top, var(--bg-panel) 30%, transparent);
+    gap: 10px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    transition: none;
+  }
+
+  /* Taller tap target on mobile */
+  .pv-toggle { height: 44px; }
+
+  .pv-btn--prev { left: 12px; }
+  .pv-btn--next { right: 12px; }
+
+}

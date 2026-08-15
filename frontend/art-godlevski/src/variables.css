@@ -1,0 +1,27 @@
+/* ── Design tokens ────────────────────────────────────────────────────────── */
+:root {
+  /* Base colors */
+  --bg:        #010d15;
+  --bg-indigo: #06051a;
+  --bg-panel:  #0e0d22;
+  --fg:        #d8d4cc;
+  --fg-soft:   #c0bcb5;   /* body text — replaces opacity: 0.88 on fg */
+  --fg-muted:  #6b6860;   /* secondary labels */
+  --fg-dim:    #52505c;   /* dimmed UI — replaces opacity: ~0.45 on fg-muted */
+  --fg-ghost:  #363444;   /* very faint — replaces opacity: ~0.28 */
+  --accent-dim: #8a7b61;  /* faded accent — replaces opacity: 0.75 on accent */
+  --accent:    #c8b89a;
+  --loading:   #0f75ef;
+
+  /* Borders & surfaces */
+  --border:    #2a2844;
+  --surface:   #1a1932;
+
+  /* Typography */
+  --font-display:  'tnlight', system-ui, -apple-system, sans-serif;
+  --font-serif:    'Georgia', 'Times New Roman', serif;
+  --font-sans:     system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --sel-bar-h: 48px;
+}

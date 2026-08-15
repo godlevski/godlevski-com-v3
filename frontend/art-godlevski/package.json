@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "rsbuild dev --env-mode ${ENV_MODE:-development}",
-    "build": "rsbuild build --env-mode ${ENV_MODE:-production}",
+    "build": "ENV_MODE=${ENV_MODE:-production} rsbuild build --env-mode ${ENV_MODE:-production}",
     "build:dev": "ENV_MODE=development pnpm build",
     "build:prod": "ENV_MODE=production pnpm build",
     "preview": "rsbuild preview",
@@ -13,15 +13,18 @@
     "clear-cache": "rm -rf node_modules/.cache"
   },
   "dependencies": {
-    "@godlevski/schemas": "workspace:*",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "lucide-react": "^1.8.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.14.0",
+    "react-spring": "^10.0.3",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@rsbuild/core": "^1.6.14",
     "@rsbuild/plugin-react": "^1.4.2",
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.0",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
     "typescript": "^5.9.2"
   }
 }

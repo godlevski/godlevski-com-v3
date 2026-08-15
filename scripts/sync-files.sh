@@ -32,9 +32,9 @@ content_type() {
 
 cd "$WORKER_DIR"
 
-# two content roots, same bucket key-space:
-#   files/                 hand-authored site assets (shapefiles, assorted)
-#   seeds/godlevski/files/ seed content (slide originals; gitignored, bucket is home)
+# content roots, same bucket key-space:
+#   files/           hand-authored site assets (shapefiles, assorted)
+#   seeds/*/files/   per-site seed content (slide originals, art gallery images)
 sync_tree() {
   local root="$1"
   [ -d "$root" ] || { echo "  (skip $root — not present on this machine)"; return; }
@@ -46,7 +46,9 @@ sync_tree() {
   done
 }
 
-echo "== syncing files/ + seeds/files/ -> r2://$BUCKET ($MODE) =="
+echo "== syncing files/ + seeds/*/files -> r2://$BUCKET ($MODE) =="
 sync_tree "$FILES_DIR"
-sync_tree "$REPO_ROOT/seeds/godlevski/files"
+for seed_files in "$REPO_ROOT"/seeds/*/files; do
+  sync_tree "$seed_files"
+done
 echo "== done =="
