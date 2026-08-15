@@ -10,7 +10,7 @@
     "lint": "concurrently --names \"fe:god,fe:art,wk:api,wk:r2,wk:ar2\" --c \"bgBlue,bgMagenta,bgGreen,bgYellow,bgCyan\" \"cd frontend/godlevski && pnpm lint\" \"cd frontend/art-godlevski && pnpm lint\" \"cd workers/godlevski-api && pnpm lint\" \"cd workers/godlevski-r2 && pnpm lint\" \"cd workers/art-godlevski-r2 && pnpm lint\" \"cd workers/godlevski-files && pnpm lint\"",
     "build": "pnpm -r build",
     "clean-node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
-    "provision": "cd infra/terraform && terraform init && terraform apply && cd ../.. && pnpm infra:sync-ids",
+    "provision": "cd infra/terraform && . ./.env && terraform init && terraform apply && cd ../.. && pnpm infra:sync-ids",
     "infra:sync-ids": "pnpm tsx scripts/apply-infra-ids.ts",
     "db:migrate:local": "pnpm tsx scripts/local-migrate.ts",
     "db:seed:local": "pnpm tsx scripts/local-seed.ts",

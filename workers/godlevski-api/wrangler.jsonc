@@ -15,7 +15,7 @@
     {
       "binding": "DB",
       "database_name": "godlevski-db",
-      "database_id": "REPLACE_AFTER_PROVISION",
+      "database_id": "b033b985-6b1d-4afe-bec0-562ef0fa0e7c",
       "migrations_dir": "../../infra/migrations/godlevski-db"
     }
   ],
