@@ -1,0 +1,18 @@
+{
+  "name": "worker-godlevski-files",
+  "version": "1.0.0",
+  "description": "files.godlevski.com — public file serving for both sites out of R2, image resizing via Images binding",
+  "author": "Dmitriy Godlevski",
+  "license": "MIT",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "dev": "wrangler dev --port 4600",
+    "deploy:worker": "wrangler deploy",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250801.0",
+    "typescript": "^5.9.2"
+  }
+}

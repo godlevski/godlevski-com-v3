@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "godlevski-files",
+  "main": "index.ts",
+  "compatibility_date": "2026-08-01",
+
+  "r2_buckets": [
+    {
+      "binding": "FILES",
+      "bucket_name": "godlevski-files"
+    }
+    // art joins under the same cap when its site migrates:
+    // { "binding": "FILES_ART", "bucket_name": "art-godlevski-files" }
+  ],
+
+  // cloudflare images — resize/transform; wrangler dev ships a local
+  // (lower-fidelity) implementation, so this works offline too
+  "images": {
+    "binding": "IMAGES"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}
