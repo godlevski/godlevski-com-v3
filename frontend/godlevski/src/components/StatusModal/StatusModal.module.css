@@ -1,0 +1,53 @@
+.modalContainer {
+  position: fixed;
+  width: 90%;
+  top: 15px;
+  left: 0; right: 0;
+  margin: 0 auto;
+  z-index: 1000 !important;
+}
+
+.modalContainer {
+  background-color: rgba(0,0,0,0.5);
+  color:  white;
+  font-family: 'Courier', serif;
+  font-size: 14px;
+  font-weight: bold;
+
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modalContainer {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+.show {
+  animation-name: appear;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+.empty {
+  display: none;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  10% {
+    opacity: 100;
+    transform: translateY(0px);
+  }
+  90% {
+    opacity: 100;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}

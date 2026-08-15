@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 210 30" enable-background="new 0 0 210 30" xml:space="preserve">
+<symbol  id="call" viewBox="-7.8 -7.8 15.6 15.6">
+	<path d="M-4.3,7.8c0.5-1.8,1-3.5,1.6-5.3c-0.5-0.2-1-0.5-1.5-0.7C-3.7,0.3-3-1-1.9-2.1c1-1,2.2-1.7,3.6-2.2c0.2,0.5,0.5,1,0.7,1.6
+		c1.8-0.5,3.5-1,5.3-1.5c0-0.1,0-0.2,0-0.3c0-0.8-0.2-1.5-0.6-2.1c-0.5-0.6-1.1-1-1.9-1.1c-0.2,0-0.5,0-0.7,0c-0.3,0-0.6,0-0.9,0
+		C2.7-7.7,1.8-7.5,0.9-7.2c-2.2,0.7-4.1,2-5.6,3.7c-1.1,1.3-1.9,2.7-2.5,4.3c-0.2,0.6-0.4,1.3-0.5,1.9c-0.1,0.4-0.1,0.7-0.1,1.1
+		c0,0.3,0,0.7,0,1c0,0.7,0.3,1.3,0.7,1.8C-6.6,7.3-6,7.6-5.3,7.8C-5,7.8-4.6,7.8-4.3,7.8C-4.3,7.8-4.3,7.8-4.3,7.8z"/>
+</symbol>
+<symbol  id="gmail" viewBox="-10.4 -7.8 20.7 15.6">
+	<path fill="#4285F4" d="M-9-7.8h3.3v8l-4.7,3.5V-6.4C-10.4-7.2-9.7-7.8-9-7.8"/>
+	<path fill="#34A853" d="M5.7-7.8H9c0.8,0,1.4,0.6,1.4,1.4V3.8L5.7,0.2"/>
+	<path fill="#FBBC04" d="M5.7,6.4V0.2l4.7,3.5v1.9c0,1.7-2,2.7-3.4,1.7"/>
+	<path fill="#EA4335" d="M-5.7,0.2v6.1L0,2.1l5.7,4.2V0.2L0-4"/>
+	<path fill="#C5221F" d="M-10.4,5.7V3.8l4.7-3.5v6.1l-1.3,1C-8.4,8.4-10.4,7.4-10.4,5.7"/>
+</symbol>
+<symbol  id="messenger" viewBox="-14.2 -14.2 28.4 28.4">
+	
+		<radialGradient id="SVGID_1_" cx="7644.2817" cy="-7772.2749" r="3.867528e-02" gradientTransform="matrix(800 0 0 799.9985 -6115434 6217794)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#0099FF"/>
+		<stop  offset="0.6098" style="stop-color:#A033FF"/>
+		<stop  offset="0.9348" style="stop-color:#FF5280"/>
+		<stop  offset="1" style="stop-color:#FF7061"/>
+	</radialGradient>
+	<path fill="url(#SVGID_1_)" d="M0,14.2c-8,0-14.2-5.9-14.2-13.8c0-4.1,1.7-7.7,4.5-10.2c0.2-0.2,0.4-0.5,0.4-0.8l0.1-2.5
+		c0-0.8,0.9-1.3,1.6-1l2.8,1.2c0.2,0.1,0.5,0.1,0.8,0.1c1.3-0.4,2.7-0.5,4.1-0.5c8,0,14.2,5.9,14.2,13.8S8,14.2,0,14.2z"/>
+	<path fill="#FFFFFF" d="M-8.5-3.6L-4.4,3c0.7,1.1,2.1,1.3,3.1,0.6L2,1.1c0.3-0.2,0.7-0.2,1,0l4.5,3.4c0.6,0.5,1.4-0.3,1-0.9L4.4-3
+		C3.7-4.1,2.3-4.3,1.3-3.6L-2-1.1c-0.3,0.2-0.7,0.2-1,0l-4.5-3.4C-8.1-5-8.9-4.2-8.5-3.6z"/>
+</symbol>
+<symbol  id="telegram" viewBox="-13.8 -13.8 27.5 27.5">
+	
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="7530.1543" y1="-8537.6172" x2="7530.2461" y2="-8537.6172" gradientTransform="matrix(-75 -174.99 -174.99 75 -929232.125 1958032.5)">
+		<stop  offset="0" style="stop-color:#37AEE2"/>
+		<stop  offset="1" style="stop-color:#1E96C8"/>
+	</linearGradient>
+	<circle fill-rule="evenodd" clip-rule="evenodd" fill="url(#SVGID_2_)" cx="0" cy="0" r="13.8"/>
+	<path fill="#FFFFFF" d="M-8.6-0.9C-7,0-5.2,0.7-3.6,1.5C-0.7,2.7,2.2,3.9,5.2,5c0.6,0.2,1.6,0.4,1.7-0.5C6.8,3.3,6.6,2.1,6.4,0.9
+		C6-1.7,5.6-4.3,5.1-6.9C5-7.7,3.9-8.2,3.2-7.6c-1.7,1.1-3.4,2.2-5,3.4c-0.5,0.5,0,1.3,0.4,1.7C0-1.2,1.5,0,2.8,1.4
+		c0.4,0.9-0.7,0.1-1-0.1C-0.1,0-2-1.3-4-2.5C-5-3-6.2-2.6-7.2-2.2C-8.1-1.9-9.4-1.5-8.6-0.9L-8.6-0.9z"/>
+</symbol>
+<symbol  id="whatsup" viewBox="-13.2 -13.7 26.5 27.3">
+	<g id="path400-6-0_1_">
+		<path fill="#FFFFFF" d="M-13.2-13.7l1.9,7c-1.2,2.1-1.8,4.4-1.8,6.8c0,7.5,5.9,13.5,13.2,13.5c3.5,0,6.8-1.4,9.3-4
+			c2.5-2.6,3.9-6,3.9-9.6c0-7.5-5.9-13.5-13.2-13.5c0,0,0,0,0,0h0c-2.2,0-4.4,0.6-6.3,1.6L-13.2-13.7z"/>
+	</g>
+	<path id="path61-8_1_" fill="none" d="M0.1,11.4c-6,0-11-5.1-11-11.3c0-2.1,0.6-4.2,1.7-6L-9-6.3l-1.1-4.2l4.1,1.1l0.4-0.2
+		c1.7-1,3.6-1.6,5.6-1.6h0c6,0,11,5.1,11,11.3c0,3-1.1,5.8-3.2,8C5.7,10.2,3,11.4,0.1,11.4L0.1,11.4z"/>
+	
+		<linearGradient id="path15_2_" gradientUnits="userSpaceOnUse" x1="5553.8657" y1="-10656.2871" x2="5553.896" y2="-10651.1943" gradientTransform="matrix(3.7795 0 0 -3.7795 -20990.9902 -40265.6992)">
+		<stop  offset="0" style="stop-color:#57D163"/>
+		<stop  offset="1" style="stop-color:#23B33A"/>
+	</linearGradient>
+	<path id="path15_1_" fill="url(#path15_2_)" d="M0.1,11.4c-6,0-11-5-11-11.3c0-2.1,0.6-4.2,1.7-6L-9-6.3l-1.1-4.2l4.1,1.1l0.4-0.2
+		c1.7-1,3.6-1.6,5.6-1.6h0c6,0,11,5.1,11,11.3c0,3-1.1,5.8-3.2,8C5.7,10.2,3,11.4,0.1,11.4z"/>
+	<path id="path418-6_1_" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M-3.2,5.8C-3.5,6.3-3.7,6.4-4,6.4
+		c-0.2,0-0.4,0-0.6,0c-0.2,0-0.6-0.1-0.9-0.4c-0.3-0.3-1.2-1.2-1.2-2.8s1.2-3.3,1.3-3.5C-5.1-0.6-3-4.1,0.3-5.5
+		c2.8-1.1,3.3-0.9,4-0.8c0.6,0.1,1.9,0.8,2.2,1.6c0.3,0.8,0.3,1.5,0.2,1.6C6.6-3,6.4-2.9,6.1-2.7c-0.3,0.2-1.9,1-2.2,1.1
+		C3.5-1.5,3.3-1.4,3.1-1.8C2.9-2.1,2.2-2.9,2-3.1C1.8-3.3,1.6-3.4,1.3-3.2C1-3-0.1-2.7-1.3-1.5c-1,0.9-1.6,2-1.8,2.3
+		c-0.2,0.3,0,0.5,0.1,0.7c0.1,0.2,0.3,0.4,0.5,0.6c0.2,0.2,0.2,0.3,0.3,0.6c0.1,0.2,0.1,0.4,0,0.6C-2.3,3.4-2.9,5.1-3.2,5.8"/>
+</symbol>
+<symbol  id="yahoo" viewBox="-12.2 -10.3 24.3 20.5">
+	<g>
+		<path fill="#5F01D1" d="M-12.2,5.3h4.4l2.6-6.6l2.6,6.6h4.3l-6.5-15.5h-4.3l1.8,4.1L-12.2,5.3z"/>
+		<circle fill-rule="evenodd" clip-rule="evenodd" fill="#5F01D1" cx="4.4" cy="-3.6" r="2.7"/>
+		<path fill="#5F01D1" d="M7.9,0H3.1l4.3,10.2h4.8L7.9,0z"/>
+	</g>
+</symbol>
+<g id="Guides_1_" display="none">
+	<g id="Guides" display="inline">
+		<rect fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="30" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="60" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="90" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="120" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="150" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="180" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="210" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="240" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="270" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="300" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+		<rect x="330" fill="none" stroke="#777777" stroke-width="0.25" stroke-miterlimit="10" width="30" height="30"/>
+	</g>
+</g>
+<g id="Icons">
+	
+		<use xlink:href="#yahoo"  width="24.3" height="20.5" x="-12.2" y="-10.3" transform="matrix(1 0 0 -1 45.761 15)" overflow="visible"/>
+	
+		<use xlink:href="#gmail"  width="20.7" height="15.6" x="-10.4" y="-7.8" transform="matrix(1 0 0 -1 15.3613 15)" overflow="visible"/>
+	
+		<use xlink:href="#messenger"  width="28.4" height="28.4" x="-14.2" y="-14.2" transform="matrix(1 0 0 -1 134.7947 15)" overflow="visible"/>
+	
+		<use xlink:href="#telegram"  width="27.5" height="27.5" x="-13.8" y="-13.8" transform="matrix(1 0 0 -1 194.6263 15)" overflow="visible"/>
+	
+		<use xlink:href="#whatsup"  width="26.5" height="27.3" x="-13.2" y="-13.7" transform="matrix(1 0 0 -1 165.0747 15)" overflow="visible"/>
+	
+		<use xlink:href="#call"  width="15.6" height="15.6" x="-7.8" y="-7.8" transform="matrix(1 0 0 -1 75.3831 15)" overflow="visible"/>
+</g>
+</svg>

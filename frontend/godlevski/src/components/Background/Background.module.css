@@ -1,0 +1,92 @@
+.bg {
+
+  display: inline-block;
+  width:  100%;
+  height: 100%;
+}
+
+.bgPane {
+  pointer-events: none;
+
+  display: inline-block;
+  position: fixed;
+
+  /* background-color: green; */
+  /* must not be higher than this to stay under scroll bars (in chrome) */
+  /* z-index: -1;  */
+}
+
+/* wierd behavior in safari if body pane lower than -40 */
+
+.topLeftPanel { z-index: 45; }
+.topCorner { z-index: 40; }
+.topPanel { z-index: 30; }
+.leftPanel { z-index: 20; }
+.bodyPane { z-index: 10; }
+
+/* offest all z-indexes due to background */
+
+:global(#root) > *:not(:global(.nozindex)):not(.bgPane) {
+  z-index: 51;
+}
+
+.topLeftPanel {
+  width: 50%;
+  height: 240px;
+
+  top: 0;
+  right: 50%;
+  margin-right: 240px;
+
+  /*background-color: darkslategray; */
+}
+
+.topCorner{
+  clip-path: polygon(0% 0%, 241px 0%, 0% 241px);
+
+  width: 240px;
+  height: 240px;
+
+  top: 0;
+  right: 50%;
+
+  /*background-color: rgb(128, 214, 31);*/
+}
+
+.topPanel {
+  clip-path: polygon(0% 240px, 240px 0%, 100% 0%, 100% 240px);
+  
+  height: 240px;
+
+  left:50%;
+  margin-left: -240px;
+  
+  right: 0;
+  top: 0;
+
+  /*background-color:darkgreen; */
+  
+}
+
+.leftPanel {
+  top: 240px;
+  right: 240px;
+  margin-right: 50%;
+
+  left:  0;
+  bottom: 0;
+
+  /*background-color: darkcyan; */
+}
+
+.bodyPane {
+  top: 240px;
+  left: 50%;
+  margin-left: -240px;
+
+  right: 0;
+  bottom: 0;
+
+  /*background-color: darkblue; */
+}
+

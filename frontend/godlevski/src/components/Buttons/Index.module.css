@@ -1,0 +1,45 @@
+/* more button */
+.moreButton {
+  background-color: rgba(191, 191, 191, 0.2);
+}
+.moreButton > svg {
+  opacity: 0.3;
+}
+.moreButton:hover {
+  background-color: rgba(191, 191, 191, 0.5);
+}
+
+.moreButton:hover > svg {
+  opacity: 0.6;
+}
+
+.moreButton {
+  display: none;
+}
+.hasMore .moreButton {
+  display: inline-block;
+}
+
+.moreButton {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  width: 18px;
+  height: 100%;
+
+  cursor: pointer;
+}
+
+.moreButton > svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.moreButton.up > svg {
+  transform: rotate(180deg) translateX(-1px);
+}

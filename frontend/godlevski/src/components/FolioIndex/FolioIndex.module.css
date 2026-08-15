@@ -1,0 +1,168 @@
+.indexPane > * {
+  position: relative;
+  z-index: 51;
+}
+
+.indexPane .iconsPane { z-index: 11; }
+.indexPane .markingTop { z-index: 31; }
+.indexPane .markingLeft { z-index: 31; }
+
+.iconsPane {
+  position: absolute !important;
+
+  left: 310px;
+  /*margin-left: 50%;*/
+  top: 252px;
+}
+
+.indexPane {
+  /*width: -webkit-intrinsic;
+  width: -moz-fit-intrinsic;
+  width: intrinsic;*/
+
+  /*width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;*/
+  
+  position: absolute;
+  
+  left: 50%;
+  margin-left: -480px;
+}
+
+
+
+.indexPane {
+
+}
+
+.lineBreak{
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.markingTop {
+  display: block;
+  margin-left: 310px !important;
+  white-space: nowrap !important;
+}
+
+.markingLeft {
+  display: inline-block;
+  margin-top: 180px !important;
+  width: 240px;
+  /* margin-left: (240px width + 240 off center = 680px) * -1 */
+  /* margin-right: 640px !important; */
+}
+
+/* sticky */
+.markingTop {
+  position: sticky;
+  top: 190px;
+
+}
+.markingLeft {
+  position: sticky;
+  left: 50%;
+}
+.markingLeft > *{
+  position: relative;
+  left: -480px;
+}
+
+/* layout */
+.markingTop li {
+  display: inline-block;
+  align-self: flex-end;
+  transform: rotate(-45deg);
+  margin-bottom: 35px;
+  width: 48px;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.indexPane {
+  
+}
+
+.tagsFade {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 15, 40, 0.7);
+  top: 0;
+  
+  /*margin: auto !important;*/
+  /*right: 0;
+  bottom: 0;*/
+  margin-left: -480px;
+}
+
+.tagsFade :global(.icon){
+
+  position: absolute;
+  right: 15px;
+  top: 0;
+  bottom: 0;
+
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  opacity: 0.8;
+}
+
+.tagsFade {
+  
+  opacity: 0;
+  transition: opacity 1000ms;
+}
+
+@media only screen and (max-width: 640px){
+  .tagsFade {
+    display: inline-block;
+    
+    animation-name: appear;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes appear{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* bacground */
+/* .markingTop::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  height: 240px;
+  top: 0;
+  left: -50%;
+  right: -200px;
+  
+  background-color: black;
+  z-index:-1;
+} */
+
+/* .markingLeft::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  top:0;
+  right: 480px;
+  width: 20000px;
+
+  margin-right: -8px;
+
+  background-color: black;
+  z-index: -1;
+} */

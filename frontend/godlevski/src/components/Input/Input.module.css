@@ -1,0 +1,183 @@
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.inputGroup > .disabled {
+  opacity: 1;
+}
+
+.input {
+  border: none;
+  font-family: inherit;
+  background-color: rgba(255,255,255,0.4);
+}
+
+.textarea {
+  border: none;
+  font-family: inherit;
+  background-color: rgba(255,255,255,0.4);
+}
+
+.textarea:focus {
+  outline-color: rgba(15, 117, 239, 0.5);
+  outline-width: 2px;
+  outline-style: solid;
+
+  box-shadow: 0 0 10px rgba(15, 117, 239, 0.7);
+}
+
+.input:focus {
+
+  outline-color: rgba(15, 117, 239, 0.5);
+  outline-width: 2px;
+  outline-style: solid;
+
+  box-shadow: 0 0 10px rgba(15, 117, 239, 0.7);
+}
+
+/* in this order */
+.textarea:global(.accepted), 
+.inputGroup:global(.accepted) .textarea,
+
+.input:global(.accepted), 
+.inputGroup:global(.accepted) .input {
+
+  background-color: rgba(165,198,229,0.4);
+
+}
+
+.textarea:global(.unfulfilled), 
+.inputGroup:global(.unfulfilled) .textarea,
+
+.input:global(.unfulfilled), 
+.inputGroup:global(.unfulfilled) .input {
+
+  background-color: rgba(229,218,165,0.4);
+
+}
+
+.textarea:global(.bad), 
+.inputGroup:global(.bad) .textarea,
+
+.input:global(.bad), 
+.inputGroup:global(.bad) .input {
+
+  background-color: rgba(255,171,171,0.4);
+
+}
+
+
+.button {
+  cursor: pointer;
+  color: white;
+  border: none;
+  background-color: rgba(15, 117, 239, 1);
+}
+
+.button:hover {
+
+  /*outline-color: rgba(15, 117, 239, 0.5);
+  outline-width: 2px;
+  outline-style: solid;*/
+
+  background-color: rgba(0, 102, 224, 1);
+  
+}
+
+.button {
+  text-transform: uppercase;
+}
+
+/* custom file upload scheme  */
+.fileContainer {
+  background-color: rgba(0,0,0,0.1);
+}
+
+:global(.dragover) .fileContainer {
+  background-color: rgba(0,0,0,0.2);
+  
+  outline-color: rgba(15, 117, 239, 0.5);
+  outline-width: 2px;
+  outline-style: solid;
+  outline-offset: 10px; 
+  border-radius: 10px;
+}
+
+.fileHook {
+  background-color: black;
+  color:  white;
+}
+
+.fileHook:hover {
+  background-color: rgba(0,0,0,0.9);
+  box-shadow: 0 0 10px rgba(15, 117, 239, 0.7);
+}
+
+.fileName {
+  background-color: rgba(255,255,255,0.2);
+  color: rgba(15, 117, 239, 1);
+  box-shadow: 0 0 3px rgba(15, 117, 239,0.5);
+
+  border-radius: 10px;
+  display: inline-block;
+  padding: 2px 5px;
+  margin: 2px 0;
+  font-weight: bold;
+}
+
+/* custom file upload fonts */
+
+.fileContainer {
+  display: inline-block;
+  text-align: center;
+}
+.fileAreaPlaceHolder{
+  line-height: normal;
+  text-transform: uppercase;
+}
+label.fileHook {
+  display: inline-block;
+  line-height: 1.2rem !important;
+  vertical-align: middle !important;
+
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0;
+}
+
+/* custom file upload construct */
+/* structure */
+
+.fileContainer {
+  display: inline-block;
+}
+
+.fileAreaPlaceHolder {
+  display: block;
+}
+
+.fileContainer > input {
+  display: none;
+}
+.fileAreaPlaceHolder {
+  margin: 10px auto 0;
+}
+
+.fileHook {
+  display: inline-block;
+  height: 22px;
+  padding: 0 20px;
+  margin: 10px auto;
+  border-radius: 10px;
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+.fileName:last-child {
+  margin-bottom: 10px;
+}

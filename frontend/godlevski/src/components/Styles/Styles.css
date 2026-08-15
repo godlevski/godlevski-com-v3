@@ -1,0 +1,120 @@
+
+
+/* ROOT PANES */
+
+/* fix for a mother FUCKING SAFARI */
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) {
+      /*#root {
+         position: fixed; 
+      }*/
+      ::-webkit-scrollbar {
+        background-color: black;
+      }
+  }
+}
+
+/* GENERAL STYLES  */
+
+/* Fonts */
+body {
+  font-family: 'Courier', serif;
+  
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
+
+button,
+input[type="button"] {
+  font-family: 'tnlight', sans-serif;
+}
+
+/* Scroll Bar  */
+/* webkit scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+
+}
+::-webkit-scrollbar-button {
+  background: white;
+}
+::-webkit-scrollbar-track {
+  background: rgba(56, 56, 56, 0.5);
+}
+::-webkit-scrollbar-track:hover {
+  background: rgba(56, 56, 56, 0.6);
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(56, 56, 56, 1);
+}
+
+::-webkit-scrollbar-thumb {
+  z-index: 100;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.3); 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6); 
+}
+
+/* firefox scroll bar  */
+html,
+body, 
+#root {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(56, 56, 56, 0.3);
+}
+
+/* Icons & Buttons Color Scheme  */
+.activeIcon:hover *[fill]:not([fill="none"]) {
+  fill: #0f75ef;
+}
+.activeIcon:hover *[stroke]:not([stroke="none"]) {
+  stroke: #0f75ef;
+}
+.activeIcon:hover  {
+  color: #0f75ef;
+}
+.activeIcon {
+  cursor:  pointer;
+}
+
+/*@media only screen and (max-device-width: 480px) and (orientation: portrait){
+  body::before {
+    content:  '480 portrait';
+    font-size: 100px;
+    color: blue;
+    z-index: 100;
+    position: absolute;
+  }
+}
+
+@media only screen and (max-device-width: 640px) and (orientation: landscape){
+  body::before {
+    content:  '480 landscape';
+    font-size: 100px;
+    color: blue;
+    z-index: 100;
+    position: absolute;
+  }
+}*/
+/* if dev mode -> set scroller to body because of chrome shit */
+@media (pointer: coarse) {
+  .dev,
+  .dev body {
+    position: fixed;
+    overflow: scroll;
+  }
+}
+
+html,
+body, 
+#root {
+  min-width: 640px;
+}
+
+* {
+  font-weight: normal;
+}

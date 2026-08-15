@@ -1,0 +1,89 @@
+.cornerButton {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100%;
+
+  cursor: pointer;
+
+  overflow: hidden;
+}
+
+.cornerButton {
+  background-color: rgba(94,94,94,0.3);
+}
+
+.cornerButton.corner-left {
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.cornerButton.corner-right {
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.cornerButton.corner-bottom {
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+.cornerButton.corner-top {
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+
+.cornerButton > svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.cornerButton.corner-left > svg {
+  transform: rotate(180deg) translateX(75%);
+}
+.cornerButton.corner-left.backward > svg {
+  transform: translateX(-25%);
+}
+
+.cornerButton.corner-right > svg {
+  transform: translateX(50%);
+}
+.cornerButton.corner-right.backward > svg {
+  transform: rotate(180deg) translateX(-25%);
+}
+
+.cornerButton.corner-bottom > svg {
+  transform: rotate(90deg) translateX(50%);
+}
+.cornerButton.corner-bottom.backward > svg {
+  transform: rotate(-90deg) translateX(-25%);
+}
+
+.cornerButton.corner-top > svg {
+  transform: rotate(-90deg) translateX(50%);
+}
+
+.cornerButton.corner-top.backward > svg {
+  transform: rotate(90deg) translateX(-25%);
+}
+
+/* defaults  */
+.cornerButton {
+  width: 100px;
+  height: 50px;
+}
+.cornerButton > svg {
+  width: 10px;
+}
+/*
+.cornerButton.corner-top {
+  top: 100px;
+  bottom: auto;
+  width: 100px;
+  height: 50px;
+}
+.cornerButton.corner-bottom {
+  bottom: 100px;
+  top: auto;
+  width: 100px;
+  height: 50px;
+}*/

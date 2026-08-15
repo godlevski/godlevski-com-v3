@@ -1,0 +1,162 @@
+
+.scroller {
+  position: fixed;
+  
+  height: 100%;
+  width: 100%;
+
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  overflow-x: scroll;
+
+  user-select: none;
+}
+
+.container {
+  position: absolute;
+  
+  height: 100%;
+  width: 100%;
+
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.blank {
+  position: absolute;
+  
+  height: 100%;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.containerRestrained {
+  position: fixed;
+  overflow: hidden; 
+}
+
+.slidesBody {
+  white-space: nowrap;
+
+  position: absolute;
+  display: inline-block;
+  padding: 0px;
+  margin: auto 0px;
+
+  top: 0;
+  bottom: 0;
+}
+
+.slide {
+  display: inline-block;
+  position: relative;
+}
+
+.slidesBody,
+.slide {
+  height: 100%;
+}
+
+.imgFull {
+  position: absolute;
+  left: 0;
+  height: 100%;
+}
+
+
+.imgPreview {
+  height: 100%;
+  
+}
+
+.loadingIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.loadingIcon {
+  max-width: 30%;
+  max-height: 30%;
+  width: 200px;
+  height: 200px;
+}
+
+/* slide nav  */
+.slideNav {
+  background-color: rgba(94,94,94,0.5) !important;
+}
+.slideNav *[fill]:not([fill="none"]){
+  fill: rgba(255,255,255,0.6);
+}
+
+.slideNav *[stroke]:not([stroke="none"]){
+  stroke: rgba(255,255,255,0.6);
+}
+
+.slideNav {
+  opacity: 1;
+}
+
+.slideNav:hover {
+  opacity: 1;
+}
+
+.slideNav {
+  position: fixed;
+  top: 50%;
+  margin-top: -80px;
+
+  width: 80px;
+  height: 160px;
+}
+
+.slideNav > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.slideNav.slidePrev {
+  left: 0;
+}
+
+.slideNav.slideNext {
+  right: 0;
+}
+
+/*states*/
+.imgPreview {
+  filter: blur(10px);
+  opacity: 0.4;
+}
+.imgFull {
+  transition: opacity 2000ms, filter 500ms;
+}
+.imgFull {
+  opacity: 0;
+}
+.imgFull:global(.active) {
+  opacity: 1;
+  filter: blur(0px);
+}
+.imgFull:not(:global(.current)) {
+  opacity: 0.4;
+  filter: blur(10px);
+}
+
+.imgPreview,
+.loadingIcon {
+  transition: opacity 500ms;
+}
+
+.imgPreview:global(.loaded),
+.loadingIcon:global(.loaded) {
+  opacity: 0;
+}

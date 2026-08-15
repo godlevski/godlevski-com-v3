@@ -1,0 +1,163 @@
+.menu {
+
+}
+
+.menu > a:global(.active)::before {
+  background-color: rgba( 255, 255, 255, 0.4 );
+}
+
+.menu > a:hover:not(:global(.active))::before {
+  background-color: rgba( 255, 255, 255, 0.2 );
+}
+
+.menu > a {
+  transition: background-color 200ms;
+}
+
+/* styling  */
+.menu > a {
+  cursor: pointer;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+/* separation  */
+.menu label {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.menu > *:not(:last-child)::after {
+  content: '|';
+  margin: 0 5px;
+}
+
+.menu label::after {
+  content: '/' !important;
+}
+
+/* links bg  */
+.menu > a {
+  position: relative;
+}
+
+.menu > a::before {
+  content:  '';
+  display: inline-block;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+}
+
+.menu > a:not(:last-child)::before {
+  right: 13px;
+}
+
+.menu > a {
+  text-decoration: none;
+  color: black;
+}
+
+/* toggle menu  */
+.toggleMenu > *::after,
+.toggleMenu > *::before {
+  content: none !important;
+  display: none !important;
+}
+
+.toggleMenu :global(.icon) {
+  width: 16px;
+  margin-right: 10px;
+}
+
+.toggleMenu :global(.icon) {
+  transition: transform 400ms;
+}
+
+.toggleMenu:global(.position0) :global(.icon) {
+  transform: rotate(-45deg);
+  /*animation-name: arrowup;*/
+}
+
+.toggleMenu:global(.position1) :global(.icon) {
+  /*animation-name: arrowdown;*/
+  transform: rotate(135deg);
+}
+
+/* condensed menu */
+
+.condenced a:global(.active) {
+
+}
+
+.condenced.menu > a:not(:last-child)::before {
+  right: -5px;
+}
+
+.condenced.menu > a {
+  margin: 10px 0;
+  user-select: none !important;
+}
+
+
+
+.condenced a:not(:global(.active)) {
+  display: none;
+}
+
+.condenced.menu a::after {
+  content: none;
+}
+
+.condenced.open a{
+  display: block;
+  border:  none;
+  
+
+  animation: appear 200ms;
+}
+
+.condenced.open::before {
+  content: '';
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  margin-top: -5%;
+  margin-left: -5%;
+  z-index: -1;
+  background-color: rgba(218,218,218,0.8);
+}
+
+/* for touch devices */
+.condenced.menu a:active,
+.condenced.menu a:focus {
+  background-color: none;
+  user-select: none !important;
+}
+
+.condenced:active a {
+  
+}
+
+
+/* TO DO:
+  RESET ON CLICK
+*/
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+

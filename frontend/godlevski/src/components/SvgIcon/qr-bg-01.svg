@@ -1,0 +1,13 @@
+<svg id="b73d6928-ebdd-4d60-95b0-59db9388e782" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="278" height="278" viewBox="0 0 278 278">
+  <rect x="26.37" y="26.4" width="225.54" height="225.54" fill="#fff" opacity="0.4"/>
+  <path d="M71.39.17H.14V71.42A660,660,0,0,0-4.39-4.37,661.85,661.85,0,0,0,71.39.17Z" fill="#aeaeae"/>
+  <path d="M207,278.12h71.25V206.87a658.57,658.57,0,0,0,4.54,75.79A661.92,661.92,0,0,0,207,278.12Z" fill="#aeaeae"/>
+  <path d="M278,71.24V0H206.76a658.5,658.5,0,0,0,75.78-4.54A661.85,661.85,0,0,0,278,71.24Z" fill="#aeaeae"/>
+  <path d="M.14,206.92v71.25H71.39A659.7,659.7,0,0,0-4.39,282.7,663.29,663.29,0,0,0,.14,206.92Z" fill="#aeaeae"/>
+  <rect x="73.03" y="73.06" width="132.22" height="132.22" fill="#fff" opacity="0.6"/>
+  <polyline points="64 226.53 51.32 226.53 51.32 226.31 51.32 213.63" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="3"/>
+  <polyline points="51.32 63.75 51.32 51.08 51.55 51.08 64.22 51.08" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="3"/>
+  <polyline points="214.56 51.08 227.23 51.08 227.23 51.3 227.23 63.98" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="3"/>
+  <polyline points="227.23 214.31 227.23 226.99 227 226.99 214.33 226.99" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="3"/>
+  <path d="M.14.17v278h278V.17ZM26.37,251.94V26.4H251.91V251.94Z" fill="#aeaeae" opacity="0.4"/>
+</svg>

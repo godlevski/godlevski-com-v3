@@ -1,0 +1,317 @@
+/* ---------------------- */
+/* Draw Area */
+/* ---------------------- */
+.areasDrawContainer {
+  border: 1px solid black;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.areaBox {
+  position: absolute;
+  background-color: rgba(255,255,255,0.1);
+  border: 1px dotted rgba(255,255,255,0.5);
+}
+
+.activeAreaBox {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* areaBox draggers */
+.areaBox .corner,
+.areaBox .side {
+  display: inline-block;
+
+  background-color: rgba(255,255,255,0.7);
+
+  width: 4px;
+  height: 4px;
+  border-radius: 3px;
+}
+
+.areaBox .corner,
+.areaBox .side {
+  position: absolute;
+
+}
+.areaBox .corner-nw {
+  top: -3px;
+  left: -3px;
+  cursor: nwse-resize;
+}
+.areaBox .corner-ne {
+  top: -3px;
+  right: -3px;
+  cursor: nesw-resize;
+}
+.areaBox .corner-sw {
+  bottom: -3px;
+  left: -3px;
+  cursor: nesw-resize;
+}
+.areaBox .corner-se {
+  bottom: -3px;
+  right: -3px;
+  cursor: nwse-resize;
+}
+
+.areaBox .side {
+  margin: auto auto;
+  width: 3px;
+  height: 3px;
+  border-radius: 3px;
+}
+.areaBox .side-n {
+  top: -2px;
+  left: 0;
+  right: 0;
+  cursor: ns-resize;
+}
+.areaBox .side-s {
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  cursor: ns-resize;
+}
+.areaBox .side-w {
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  cursor: ew-resize;
+}
+.areaBox .side-e {
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  cursor: ew-resize;
+}
+
+/* ---------------------- */
+/* Slide Manager */
+/* ---------------------- */
+.managerBody {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #333;
+}
+
+.managerBody aside {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  
+  background-color: rgba(0,0,0,0.2);
+  left: 70%;
+}
+
+.dropContainer {
+  
+  display: inline-block;
+  background-color: rgba(0,0,0,0.1);
+  
+  width: 90%;
+  margin: 15px 5%;
+}
+
+.projectDataContainer {
+  position: relative;
+  width: 96%;
+  margin: 15px 2% 5px;
+}
+
+/* list of areas */
+.areasContainer {
+  flex-grow: 10;
+  width: 100%;
+
+  overflow-y: scroll;
+
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.imageContainer {
+  position: absolute;
+  height: 100%;
+  width: 70%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* slide image */
+
+.slideImage {
+  position: absolute;
+  max-width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 100%;
+  margin: auto auto;
+  pointer-events: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+.managerBody aside {
+  text-align: right;
+}
+/* Inputs */
+.projectField label {
+  display: inline-block;
+  width: 150px;
+  float: left;
+  text-align: left;
+}
+
+.inputGroup {
+  width: 100%;
+  color:  white;
+  text-align: right;
+}
+
+/* -- Styles --  */
+
+/* Drop Container */
+.dropContainer > div {
+  width: 100%;
+  height: 100%;
+}
+
+.dropContainer label{
+  display: inline-block;
+  padding: 3px 10px;
+}
+
+.dropContainer {
+  color: white;
+}
+
+.dropContainer > label {
+  display: none;
+}
+
+/* Inputs */
+.inputGroup > *,
+.input,
+.button {
+  margin: 3px;
+  line-height: 25px;
+}
+
+.button {
+  color:  white;
+  background-color: rgba(15, 117, 239, 1);
+}
+.inputGroup input,
+.input {
+  color: black;
+}
+.inputGroup input::placeholder,
+.input::placeholder  {
+  color: #444;
+}
+
+/*  Area */
+.dataArea {
+  text-align: left;
+  margin: 5px;
+}
+.dataArea > * {
+  vertical-align: middle;
+  margin: 5px;
+}
+.dataArea .button {
+
+}
+
+/* -- Buttons */
+.buttons {
+  font-size: 16px;
+  margin: 3px;
+
+}
+
+.button {
+  color:  white;
+  font-weight: bold;
+  border: none;
+  margin: none;
+  padding: none;
+  cursor: pointer;
+}
+.buttonRed,
+.button.red {
+  background-color: red;
+}
+
+.buttonRed:hover,
+.button.red:hover {
+  background-color: darkred;
+}
+
+/* ---------------------- */
+/* Slides */
+/* ---------------------- */
+
+.slidesList {
+  border: 1px dotted #333;
+}
+
+.slideItem {
+  display: flex;
+
+  background-color: #333;
+  color: white;
+
+  margin-bottom: 1px;
+
+  cursor: pointer;
+}
+
+.slideItem:hover {
+  background-color: rgba(255,255,255,0.3);
+}
+.slideItem > * {
+  border-left: 1px solid black;
+  padding: 5px 10px;
+}
+
+/* ---------------------- */
+/* Sign In */
+/* ---------------------- */
+.signinContainer {
+  position: absolute;
+  width: 300px;
+  height: 100px;
+
+  padding: 50px 70px 30px;
+  
+  margin: auto auto;
+  right: 0; left: 0;
+  bottom: 0; top: 0;
+
+  background-color: #333;
+  color:  white;
+
+  text-align: center;
+
+}
+
+.signinContainer > div {
+  margin-bottom: 10px;
+}
+
+.signinContainer a{
+  color: white;
+  background-color: #111;
+  padding: 3px 10px;
+  text-decoration: none;
+}

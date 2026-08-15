@@ -1,0 +1,37 @@
+.scheme-white *{
+  color: white;
+}
+
+.scheme-white *[fill]:not([fill="none"]){
+  fill: white;
+}
+
+.scheme-white *[stroke]:not([stroke="none"]){
+  stroke: white;
+}
+\
+
+.scheme-blue *{
+  color: #0f75ef;
+}
+
+.scheme-blue *[fill]:not([fill="none"]){
+  fill: #0f75ef;
+}
+
+.scheme-blue *[stroke]:not([stroke="none"]){
+  stroke: #0f75ef;
+}
+
+
+.scheme-black *{
+  color: black;
+}
+
+.scheme-black *[fill]:not([fill="none"]){
+  fill: black;
+}
+
+.scheme-black *[stroke]:not([stroke="none"]){
+  stroke: black;
+}

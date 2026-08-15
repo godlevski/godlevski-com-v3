@@ -1,0 +1,46 @@
+/* default theme */
+.toolLabel.dark,
+.toolLabel {
+  border-color: rgba(0,0,0,0.3);
+  color: rgba(0,0,0,0.3);
+}
+.toolLabel.dark:hover,
+.toolLabel:hover {
+  border-color: rgba(0,0,0,0.7);
+  color: rgba(0,0,0,0.7);
+}
+.toolLabel.light {
+  border-color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.3);
+}
+.toolLabel {
+  border: 2px solid;
+  text-transform: uppercase;
+  cursor: context-menu;
+}
+
+.toolLabel{
+  display: inline-block;
+  padding: 5px;
+  margin: 2px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+}
+.toolLabel ,
+.iconSvg {
+  vertical-align: top;
+}
+.iconSvg{
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.iconSvg {
+  display: inline-block;
+  opacity: 0.9;
+  cursor: context-menu;
+}
+.iconSvg:hover {
+  opacity: 1;
+  cursor: context-menu;
+}

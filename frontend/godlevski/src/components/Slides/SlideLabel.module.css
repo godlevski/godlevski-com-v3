@@ -1,0 +1,254 @@
+/* colors */
+.section {
+  border-right-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255,255,255,0.9);
+}
+
+.section:not(.tools) :global(.icon) *[fill]:not([fill="none"]){
+  fill: rgba(255,255,255,0.9);
+}
+.section:not(.tools) :global(.icon) *[stroke]:not([stroke="none"]){
+  stroke: rgba(255,255,255,0.9);
+}
+
+.section.tools :global(.icon) {
+  border-color: rgba(255,255,255,0.6);
+  color:  rgba(255,255,255,0.6);
+}
+.section.tools :global(.icon):hover {
+  border-color: rgba(255,255,255,1);
+  color:  rgba(255,255,255,1);
+}
+
+.sectionLabel {
+  color: rgba(255, 255, 255, 0.4);
+}
+.moreButton {
+  background-color: rgba(191, 191, 191, 0.2);
+}
+.moreButton > svg {
+  opacity: 0.3;
+}
+.moreButton:hover {
+  background-color: rgba(191, 191, 191, 0.5);
+}
+
+.moreButton:hover > svg {
+  opacity: 0.6;
+}
+
+/* fonts */
+.sectionLabel {
+  font-family: 'tnlight', sans-serif;
+  font-weight: bold;
+  text-transform: lowercase;
+  letter-spacing: 0.1em;
+  font-size: 18px;
+}
+.section.label {
+  font-family: 'tnlight', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 24px;
+}
+
+/* positioning */
+.labelContainer {
+  pointer-events: none;
+}
+
+.section {
+  pointer-events: all;
+}
+
+.labelContainer {
+  position:  absolute;
+  width: 100%;
+  bottom: 0px; 
+  background-color: rgba(94,94,94,0.8);
+  background: linear-gradient(to top, rgba(94,94,94,0), rgba(94,94,94,0.7) 10px, rgba(94,94,94,0.8) 40px);
+  
+}
+.labelBody {
+  max-width: 100%;
+  width: 960px;
+  height: 100%;
+  margin: 0 auto;
+}
+.section {
+  overflow: hidden;
+}
+.section {
+  position: relative;
+  margin-bottom: 10px;
+}
+.moreButton {
+  display: none;
+}
+.hasMore .moreButton {
+  display: inline-block;
+}
+
+.moreButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 18px;
+  height: 100%;
+
+  cursor: pointer;
+}
+.moreButton > svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.section {
+  overflow: hidden;
+}
+
+.moreButton.up > svg {
+  transform: rotate(180deg) translateX(-1px);
+}
+.section.label {
+  white-space: nowrap;
+}
+
+.section.tools > *:not(.sectionLabel):not(.moreButton){
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.section.tools :global(.icon){
+  -webkit-filter: grayscale(1); /* Webkit */
+  filter: gray; /* IE6-9 */
+  filter: grayscale(1); /* W3C */
+}
+
+.section.tools :global(.icon):hover {
+  -webkit-filter: grayscale(0); /* Webkit */
+  filter: none; /* IE6-9 */
+  filter: grayscale(0); /* W3C */
+}
+
+
+.labelBody {
+  display: flex;
+  min-height: 83px;
+}
+.section {
+  display: inline-block;
+}
+.section.tools, 
+.section.tags {
+  flex-shrink: 10;
+}
+.section.last {
+  flex-grow: 100;
+  margin-right: 83px;
+}
+
+
+/* styling */
+.section {
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+.section {
+  padding: 6px 16px 12px;
+}
+
+
+.moreButton {
+  width: 18px;
+}
+.section.hasMore{
+  padding-right: 34px;
+}
+
+.sectionLabel {
+  margin-bottom: 6px;
+}
+
+.section.navigation > * {
+  font-family: 'tnlight', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+}
+.section.navigation {
+  padding-top: 10px;
+}
+.section.navigation > * {
+  margin-top: 10px;
+  white-space: nowrap;
+}
+.section.navigation a{
+  text-decoration: none;
+  color: white;
+  
+}
+.indexButton {
+  cursor: pointer;
+}
+.indexButton svg {
+  margin-right: 15px;
+}
+
+/* animation and transition */
+/*.section {
+  transition: all 240ms ease-out;
+}*/
+
+/* states  */
+.labelContainer{
+  overflow: hidden;
+}
+
+.labelBody {
+  height: 83px;
+  max-height: 83px;
+}
+.labelBody.expanded{
+  height: 100%;
+  max-height: 1000px;
+}
+
+.labelBody {
+  transition: max-height 800ms;
+}
+
+
+.enter .labelBody{
+  opacity: 0;
+  transform: translateY(50%);
+  /*background-color: yellow;*/
+}
+.enter-active .labelBody{
+  opacity: 1;
+  transform: translateY(0);
+  /*background-color: green;*/
+}
+
+.exit .labelBody{
+  opacity: 1;
+  transform: translateY(0);
+  /*background-color: blue;*/
+}
+.exit-active .labelBody{
+  opacity: 0;
+  transform: translateY(-50%);
+}
+
+
+.enter-active .labelBody,
+.exit-active .labelBody{
+  transition: opacity 100ms, transform 100ms;
+}

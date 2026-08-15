@@ -1,0 +1,216 @@
+/* color scheme  */
+.contactButton {
+  border-color: rgba(0,0,0,0.15);
+}
+.contactButton:hover {
+  border-color: rgba(0,0,0,0.3);
+}
+
+.scheme-white .contactButton {
+  border-color: rgba(255,255,255,0.15);
+}
+.scheme-white .contactButton:hover {
+  border-color: rgba(255,255,255,0.3);
+}
+
+.scheme-white *:not(.prefilled) > *[fill]:not([fill="none"]),
+.scheme-white svg:not(.contactButton) {
+  fill: white;
+}
+.scheme-white *:not(.prefilled) > *[stroke]:not([stroke="none"]) {
+  stroke: white;
+}
+
+.scheme-blue .contactButton {
+  border-color: rgba(16,151,252,0.15);
+}
+.scheme-blue .contactButton:hover {
+  border-color: rgba(16,151,252,0.3);
+}
+
+.scheme-blue *:not(.prefilled) > *[fill]:not([fill="none"]),
+.scheme-blue svg:not(.contactButton) {
+  fill: #1097fc;
+}
+.scheme-blue *:not(.prefilled) > *[stroke]:not([stroke="none"]) {
+  stroke: #1097fc;
+}
+
+/*  styles */
+.contactContainer {
+  position:  fixed;
+  bottom: 50px;
+  right: 50%;
+  margin-right: -433px;
+
+  z-index: 1000 !important;
+
+}
+
+.contactContainer {
+  pointer-events: none;
+}
+.contactContainer > * {
+  pointer-events: all;
+}
+
+.contactContainer.mode-slides {
+  bottom: 8px;
+  margin-right: -480px;
+
+  animation: appear 500ms;
+  animation-fill-mode: forwards;
+  animation-delay: 500ms;
+  opacity: 0;
+}
+
+.contactContainer.mode-folio {
+  top: 54px;
+  bottom: auto;
+  left: 50%;
+  margin-left: -210px;
+
+  animation: appear 5000ms;
+  animation-fill-mode: forwards;
+  animation-delay: 1000ms;
+  opacity: 0;
+
+}
+
+.contactContainer.direction-forward > * {
+  float: left;
+  margin-left: 0;
+  margin-right: 15px;
+}
+
+.contactContainer.direction-backward > * {
+  float: right;
+  margin-left: 15px;
+  margin-right: 0;
+}
+
+.contactButton {
+  cursor: pointer;
+}
+.contactButton {
+  padding: 5px;
+  border-width: 10px;
+  border-style: solid;
+  
+  border-radius: 100px;
+  line-height: 0px;
+  margin: 5px;
+}
+
+.mainButton {
+  margin-left: 15px;
+}
+/* main button  */
+.mainButton {
+  position: relative;
+}
+
+.mainButton > *:not(:first-child) {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 5px;
+  margin: auto;
+}
+
+.mainButton {
+  cursor: pointer;
+}
+
+.mainButton > *:first-child {
+  opacity: 0.35;
+}
+
+.mainButton:hover > *:first-child {
+  opacity: 0.7;
+}
+
+
+/* States  */
+.contactButton {
+  transition: opacity 300ms, transform 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+.contactContainer > * + * {
+  transition-delay: 100ms;
+}
+
+.contactContainer > * + * + * {
+  transition-delay: 200ms;
+}
+
+.contactContainer > * + * + * + * {
+  transition-delay: 300ms;
+}
+
+.mainButton {
+  transition: opacity 100ms;
+}
+.mainButton .shortarrow,
+.mainButton .dialog {
+  transition: opacity 200ms, transform 200ms;
+}
+
+.contactButton {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(10px) rotate(-45deg);
+}
+.active .contactButton {
+  opacity: 1;
+  transform: translateX(0) rotate(0);
+  pointer-events: all;
+}
+
+.active .mainButton {
+  opacity: 0.4;
+}
+
+.mainButton .shortarrow{
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+.mainButton .dialog{
+  opacity: 1;
+}
+
+.active .mainButton .shortarrow{
+  opacity: 1;
+  transform: rotate(0deg);
+}
+.active .mainButton .dialog{
+  opacity: 0;
+}
+
+@keyframes appear{
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .contactContainer {
+    position:  fixed;
+    bottom: 10px;
+    right: 10px;
+    left: auto;
+    top: auto;
+    margin-right: auto;
+
+    z-index: 1000 !important;
+
+  }
+  .contactContainer.mode-slides {
+    margin-right: auto;
+  }
+}

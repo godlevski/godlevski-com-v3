@@ -1,0 +1,46 @@
+/* PLAY CONTROL */
+.playControls {
+  position: relative;
+
+  width: 120px;
+  height: 45px; 
+}
+
+.playControls > * {
+  cursor: pointer;
+}
+.playControls *[stroke],
+.playControls *[fill] {
+  transition: all 300ms;
+  opacity: 0.25;
+}
+.playControls > *:hover *[stroke],
+.playControls > *:hover *[fill] {
+  opacity: 1;
+}
+.playControls > *:hover *[stroke]:not([stroke=none]) {
+  stroke: #0f75ef;
+}
+.playControls > *:active *[stroke]:not([stroke=none]) {
+  stroke: black;
+}
+
+.playControls .playPause {
+  position: absolute;
+  left: 15px;
+}
+
+.playControls .navArrows {
+  width: 40px;
+  cursor: pointer;
+
+  position: absolute;
+}
+.playControls .navArrows.prev {
+  right: 0;
+  top: 5px;
+}
+.playControls .navArrows.next {
+  right: 17px;
+  top: 27px;
+}

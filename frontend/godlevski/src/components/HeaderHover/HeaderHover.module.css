@@ -1,0 +1,361 @@
+/* Fonts  */
+.button {
+  filter: grayscale(1);
+}
+.button:hover {
+  filter: grayscale(0);
+}
+
+.headerHover {
+  font-family: 'Courier', serif;
+  font-weight: normal;
+}
+
+/* Color Schemes */
+.headerHover::before,
+.headerHover::after {
+  background-color: rgba(240,240,240,0.9);
+}
+
+.button::after {
+  border-collapse: separate;
+  border-left: 1px solid #cecece;
+  box-shadow: inset 0 0 5px rgba(255,255,255,0.7);
+  
+}
+
+.button:hover::after {
+  background: linear-gradient(to bottom right, rgba(0,0,0,0.05), rgba(0,0,0,0) 10%);
+}
+.button:hover.buttonSlash::after {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0) 20%);
+}
+.button.buttonSlash + *:hover::after {
+  background: linear-gradient(to bottom right, rgba(0,0,0,0.4), rgba(0,0,0,0) 41%);
+}
+
+.buttonGroupTop .button:hover.buttonSlash::after {
+  background: linear-gradient(to top left, rgba(0,0,0,0.5), rgba(0,0,0,0) 42%);
+}
+.buttonGroupTop .button.buttonSlash + *:hover::after {
+  background: linear-gradient(to top, rgba(0,0,0,0.15), rgba(0,0,0,0) 36%);
+}
+
+
+/* Layout */
+.fixedPane {
+  position:  absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+
+}
+
+.fixedPane > * {
+  pointer-events: all;
+}
+
+.buttonGroup {
+  position: absolute;
+  left: 50%;
+  margin-left: 240px;
+  font-size: 12px;
+  line-height: 40px;
+}
+
+.buttonGroupTop {
+  height: 47px;
+  top: 80px;
+}
+
+.buttonGroupBottom {
+  top: 182px; /*160 + (80-47) - 10px;*/
+}
+
+.button {
+  display: inline-block;
+  height: 47px;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+/* styles  */
+.buttonGroup {
+  
+  vertical-align: middle;
+}
+.button {
+  cursor: pointer;
+  vertical-align: top;
+  text-align: center;
+  white-space: nowrap;
+}
+.button > * {
+  vertical-align: middle;
+}
+
+.buttonGroup {
+  display: inline-flex;
+  width: 210px;
+}
+.buttonGroup > * {
+  flex-grow: 4;
+}
+
+.buttonGroupBottom >*:first-child{
+  flex-grow: 0;
+}
+
+
+/* Color Schemes layout */
+.headerHover::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 127px;
+
+  z-index: -100;
+}
+.headerHover::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 182px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: -100;
+}
+
+
+
+/* Color Schemes styling */
+
+/* margins and such */
+.button.buttonSlash {
+  padding-right: 30px; /*x + 10px of padding for shaddow accounted for in 'after' rotated positioning*/ 
+}
+.button.buttonSlash + *{
+  margin-left: -30px;
+  padding-left: 30px;
+}
+
+/* after positionning */
+
+.button {
+  position: relative;
+  overflow: hidden;
+  
+  padding-right: 10px;
+    
+}
+
+.button::after{
+  content: '';
+  position: absolute;
+  display: inline-block;
+  z-index: -1;
+
+  width: 300px;
+  height: 300px;
+}
+
+.button:last-child::after {
+  border-right: none !important;
+  box-shadow: none !important;
+}
+
+.button::after {
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+}
+
+.button.buttonSlash::after {
+  width: 300px;
+  height: 300px;
+  transform: rotate(30deg);
+
+  top: -113px;
+  right: 44px;
+  left: auto;
+}
+
+.button.buttonSlash + .button::after {
+  width: 300px;
+  height: 300px;
+  transform: rotate(30deg);
+
+  top: -113px;
+  left: 29px;
+}
+
+.closeButton {
+  position: absolute;
+  left: 50%;
+  margin-left: 410px;
+  top: 25px;
+}
+
+/* QR frame  */
+.qrFrame {
+  position: absolute;
+  width:  278px;
+  height:  278px;
+  
+  margin: auto auto;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  transform: rotate(-45deg);
+}
+
+.qrFrame img {
+  position: absolute;
+  margin: auto;
+  
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.qrFrame .frame {
+  position:  absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0; 
+  bottom: 0;
+  right: 0;
+}
+
+.qrButton {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  
+  margin-top: 140px;
+  margin-left: 50px;
+
+  border-bottom: 1px dotted rgba(0,0,0,0.1);
+}
+
+.qrButton {
+  
+  padding: 0 10px;
+}
+
+.qrButton::after {
+  content: none;
+}
+
+/* Animation */
+.headerHover .qrFrame {
+  /*opacity: 0;*/
+  animation: appear 2500ms, zoomin 700ms;
+  /*animation-delay: 700ms;*/
+  /*animation-fill-mode: forwards;*/
+  animation-timing-function: ease-in-out;
+}
+.headerHover .qrFrame > * {
+  animation-name: appear;
+  animation-fill-mode: forwards;
+  animation-delay: 200ms;
+  animation-duration: 700ms;
+}
+.headerHover .buttonGroupTop, 
+.headerHover .buttonGroupBottom {
+  opacity: 0;
+  animation-name: appear;
+  animation-fill-mode: forwards;
+  animation-delay: 200ms;
+  animation-duration: 700ms;
+} 
+
+.headerHover::before {
+  animation: topdown 400ms, appear 700ms;
+  animation-timing-function: easeOutBounce;
+}
+
+.headerHover::after {
+  animation: lowerup 400ms, appear 700ms;
+  animation-timing-function: ease-in-out;
+}
+
+.qrButton{
+  opacity: 0;
+  animation-name: appear;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+  animation-delay: 500ms;
+}
+
+@keyframes topdown {
+  from {
+    height: 0;
+  }
+}
+
+@keyframes lowerup {
+  from {
+    top: 50%;
+  }
+}
+
+@keyframes zoomin{
+  from {
+    transform: rotate(-30deg) scale(0);
+  }
+
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*.button.buttonSlash::before {
+  width: 300px;
+  height: 300px;
+  transform: rotate(30deg);
+
+  top: -113px;
+  right: 54px;
+
+  background-color: blue;
+}*/
+
+/* Media query  */
+@media only screen and (max-width: 960px){
+  
+  .buttonGroup {
+    /*position: absolute;
+    left: 50%;*/
+    left: auto;
+    right: 10px;
+    margin-left: 107px;
+  }
+
+  .closeButton {
+    left: auto;
+    right: 10px;
+  }
+}
+
+.fixedPane {
+  min-width: 640px;
+}

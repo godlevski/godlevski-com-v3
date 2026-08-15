@@ -1,0 +1,227 @@
+/* Container */
+.headerContainer {
+  display: inline-block;
+  position: sticky;
+  
+  left: 50%;
+
+  width: 0; height: 0;
+  border: 1px solid rgba(0,0,0,0);
+}
+
+.headerContainer.mode-folio {
+  position: fixed;
+}
+
+/* /Container */
+
+.modeSwitch {
+  font-family: 'tnlight', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  
+}
+.modeSwitch a {
+  text-decoration: none;
+}
+
+/* definition */
+.headerItem {
+  /* z-index only applies to realative or higher  */
+  position: relative;
+  position: absolute; 
+  z-index: 51;
+}
+/* colors  */
+/* colors  */
+.headerItem > a:global(.active)::before {
+  background-color: rgba( 255, 255, 255, 0.4 );
+}
+
+.headerItem > a:hover:not(:global(.active))::before {
+  background-color: rgba( 255, 255, 255, 0.2 );
+}
+
+.headerItem {
+  white-space: nowrap;
+}
+
+.leftMenu:global(.position0) *{
+  color: black;
+  stroke:  black;
+}
+
+.leftMenu:global(.position1) *{
+  color: white;
+  stroke:  white;
+}
+
+.leftMenu:hover * {
+  color:  #0f75ef;
+  stroke: #0f75ef;
+}
+
+/* fonts  */
+.headerItem{
+  font-family: 'tnlight', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* schologo  */
+.schlogo {
+  text-align: right;
+  font-style: normal;
+  cursor: pointer;
+}
+
+.schlogo span {
+  margin: 0 3px;
+}
+.schlogo span:last-child {
+  margin-right: 0;
+}
+
+.schlogo h1, 
+.schlogo h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.schlogo h1 {
+  font-size: 24px;
+}
+
+.schlogo h2 {
+  font-size: 14px;
+}
+
+.schlogo a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.leftMenu,
+.middleMenu {
+  font-size: 18px;
+}
+
+/* layout */ 
+.headerContainer .schlogo {
+  top: 155px;
+  margin-top: -24px;
+  /* this way it doesn't trigger scroll to appear for few sec on safari and chrome, causing trimmering of an image */
+  right: 50%;
+  margin-right: -440px;
+}
+
+
+
+.headerContainer .leftMenu,
+.headerContainer .middleMenu {  
+  top:  155px;
+  margin-top:  -18px;
+}
+
+.headerContainer .leftMenu {
+  left: 50%;
+  margin-left: -418px;
+}
+
+.headerContainer .middleMenu {
+  left: 50%;
+  margin-left: -240px;
+}
+
+/* states */
+.headerContainer .leftMenu, 
+.headerContainer .middleMenu,
+.headerContainer .schlogo{
+  transition: opacity 400ms, clip-path 300ms;
+  transition-timing-function: ease-in-out;
+  clip-path: polygon(-10% -10%, 110% -10%, 110% 110%, -10% 110%);
+}
+
+.headerContainer .middleMenu:global(.mode-folio),
+.headerContainer .schlogo:global(.mode-folio) {
+  opacity: 0;
+  pointer-events: none;
+  clip-path: polygon(110% -10%, 110% 110%, 110% -10%, -10% 300% );
+}
+
+/* animation  */
+.headerContainer .leftMenu, 
+.headerContainer .middleMenu,
+.headerContainer .schlogo {
+  animation-name: appear;
+  
+  animation-timing-function: ease-in-out;
+}
+
+.headerContainer .leftMenu {
+  animation-duration: 1400ms;
+}
+
+.headerContainer .middleMenu {
+  animation-duration: 1100ms;
+}
+
+.headerContainer .schlogo {
+  animation-duration: 400ms;
+} 
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Media query  */
+/*@media only screen and (max-width: 640px){
+  
+  .headerContainer .schlogo {
+    margin-right: -310px !important;
+  }
+  .headerContainer .middleMenu {
+    margin-left: -140px;
+  }
+
+  .headerContainer .leftMenu {
+     margin-left: -280px;
+  }
+
+}*/
+
+@media only screen and (max-width: 960px){
+
+  .headerContainer {
+    width: 99%;
+    left: 0;
+  }
+
+  .headerContainer .schlogo {
+    right: 20px;
+    margin-right:  0px;
+  }
+  .headerContainer .middleMenu {
+    margin-left: -140px;
+  }
+
+  .headerContainer .leftMenu {
+     margin-left: -280px;
+  }
+
+}
+
+@media only screen and (max-width: 640px) {
+  .headerContainer .schlogo {
+    right: 10px;
+    margin-right:  0px;
+  }
+}
+

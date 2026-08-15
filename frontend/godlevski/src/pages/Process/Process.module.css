@@ -1,0 +1,43 @@
+.processLoop {
+  margin: 100px auto;
+  display: block;
+  max-width: 98%;
+  padding: 0;
+}
+
+.arrow {
+  margin-left: 88px;
+  margin-top: 60px;
+  max-width: 160px;
+}
+
+.textBlock {
+  margin-top: 60px;
+  margin-left: 40px;
+  display: inline-block;
+  width: 340px;
+  padding-top: 1px;
+}
+
+.textBlock h4 {
+  font-size: 16px;
+  margin: 0;
+}
+.textBlock p{
+  font-size: 12px;
+}
+
+.processLoop,
+.arrow,
+.textBlock {
+  animation:  appear 500ms ease-in-out;
+}
+
+@keyframes appear{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

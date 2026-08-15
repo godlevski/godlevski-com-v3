@@ -1,0 +1,13 @@
+.log {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 10px;
+  color: blue;
+  z-index: 1000;
+}
+.log p {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px dotted blue;
+}
