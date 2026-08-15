@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "tsx watch test-runner.ts",
     "dev:wrangler": "wrangler dev --port 4300",
-    "deploy:worker": "wrangler deploy",
+    "deploy:worker": "bash ../../scripts/deploy-worker.sh godlevski-api",
     "db:migrate:local:wrangler": "wrangler d1 migrations apply godlevski-db --local",
     "db:migrate:remote": "wrangler d1 migrations apply godlevski-db --remote",
     "lint": "tsc --noEmit"

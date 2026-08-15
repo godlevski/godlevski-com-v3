@@ -3,6 +3,7 @@
 // directly from node-side code (express runners, scripts)
 export * from './handleErrorResponse';
 export * from './runtime';
+export * from './jwt';
 export * from './stringifyJsonOutput';
 export * from './logHelpers';
 export * from './toWorkerResponse';

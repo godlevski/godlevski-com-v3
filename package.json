@@ -18,6 +18,7 @@
     "db:migrate:remote": "cd workers/godlevski-api && pnpm db:migrate:remote",
     "deploy:all": "pnpm deploy:worker:api && pnpm deploy:worker:files && pnpm deploy:worker:r2 && pnpm deploy:worker:art-r2 && pnpm deploy:fe:godlevski && pnpm deploy:fe:art-godlevski",
     "deploy:worker:api": "cd workers/godlevski-api && pnpm deploy:worker",
+    "secrets:push:api": "bash scripts/push-secrets.sh godlevski-api",
     "deploy:worker:r2": "cd workers/godlevski-r2 && pnpm deploy:worker",
     "deploy:worker:art-r2": "cd workers/art-godlevski-r2 && pnpm deploy:worker",
     "deploy:worker:files": "cd workers/godlevski-files && pnpm deploy:worker",

@@ -4,11 +4,11 @@
   "main": "index.ts",
   "compatibility_date": "2026-08-01",
 
-  // api routes get stripped of this prefix before the agnostic path split
-  "vars": {
-    "OMIT_PATH_PREFIX": "/api",
-    "SERVICE_NAME": "godlevski-api"
-  },
+  // no "vars" here by design — ALL config travels from the env vault
+  // (.env.production[.local], or CI env) at deploy time via
+  // scripts/deploy-worker.sh --var injection; secrets via
+  // scripts/push-secrets.sh. This file declares bindings only.
+  // (wrangler dev parity path reads .dev.vars — gitignored.)
 
   // sqlite locally (miniflare), D1 remotely — same binding either way
   "d1_databases": [

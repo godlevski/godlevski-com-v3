@@ -24,10 +24,17 @@ if (!fs.existsSync(sqlitePath)) {
   console.warn(`[test-runner] no local db at ${sqlitePath} — run \`pnpm db:migrate:local\` (migrations are manual)`);
 }
 console.log(`[test-runner] local D1 -> ${sqlitePath}`);
+// all plain vars from the env cascade ride into the bindings object, so
+// controllers see the same names the deployed worker gets from wrangler vars
+const CARRIED_VARS = [
+  'OMIT_PATH_PREFIX', 'SERVICE_NAME',
+  'EMAIL_FROM', 'EMAIL_LINK_BASE', 'JWT_SECRET', 'RESEND_API_KEY',
+  'TOKEN_EXPIRATION_MS', 'EMAIL_VERIFICATION_LIFESPAN_MS',
+  'EMAIL_VERIFICATION_REQUEST_LIFESPAN_MS', 'EMAIL_HOOK_LIFESPAN_MS',
+];
 const env: AgnosticEnv = {
   DB: createLocalD1(sqlitePath),
-  OMIT_PATH_PREFIX: process.env.OMIT_PATH_PREFIX || '/api',
-  SERVICE_NAME: process.env.SERVICE_NAME || 'godlevski-api (express)',
+  ...Object.fromEntries(CARRIED_VARS.filter(name => process.env[name] !== undefined).map(name => [name, process.env[name]])),
 };
 const ctx = { waitUntil: (_promise: Promise<unknown>) => {} };
 

@@ -9,6 +9,7 @@ import { introDataGetController } from './controllers/introDataGetController';
 import { tagsIndexGetController } from './controllers/tagsIndexGetController';
 import { slidesGetController } from './controllers/slidesGetController';
 import { helloRouter } from './routers/helloRouter';
+import { emailRouter } from './routers/emailRouter';
 
 // this is a platform agnostic handler entry point
 // all events are mapped from the corresponding platform
@@ -32,6 +33,9 @@ export const agnosticHandler = async (event: AgnosticEvent): Promise<AgnosticOut
         break;
       case 'slides':
         response = await slidesGetController(event);
+        break;
+      case 'email':
+        response = await emailRouter(event);
         break;
       case 'hello':
         response = await helloRouter(event);
