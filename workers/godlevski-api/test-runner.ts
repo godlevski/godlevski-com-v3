@@ -5,9 +5,11 @@ import path from 'node:path';
 import fs from 'node:fs';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import multer from 'multer';
 import { loadEnv } from '@godlevski/agnostic-lambda/helpers/loadEnv';
 import { AgnosticEnv } from '@godlevski/agnostic-lambda/helpers';
 import { createLocalD1 } from '@godlevski/agnostic-lambda/d1Shim';
+import { createLocalR2 } from '@godlevski/agnostic-lambda/r2Shim';
 import { expressEntryHandler } from './index';
 
 // *** ENVIRONMENT
@@ -31,9 +33,12 @@ const CARRIED_VARS = [
   'EMAIL_FROM', 'EMAIL_LINK_BASE', 'JWT_SECRET', 'RESEND_API_KEY',
   'TOKEN_EXPIRATION_MS', 'EMAIL_VERIFICATION_LIFESPAN_MS',
   'EMAIL_VERIFICATION_REQUEST_LIFESPAN_MS', 'EMAIL_HOOK_LIFESPAN_MS',
+  'CLIENT_FILES_PUBLIC', 'INQUIRY_TO',
 ];
 const env: AgnosticEnv = {
   DB: createLocalD1(sqlitePath),
+  // local stand-in for the FILES r2 binding (writes under local/godlevski-files/)
+  FILES: createLocalR2(path.resolve(__dirname, '../../local/godlevski-files')),
   ...Object.fromEntries(CARRIED_VARS.filter(name => process.env[name] !== undefined).map(name => [name, process.env[name]])),
 };
 const ctx = { waitUntil: (_promise: Promise<unknown>) => {} };
@@ -43,6 +48,9 @@ app.use(cookieParser());
 app.use(express.text());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+// multipart parity with the worker's request.formData(): fields onto req.body,
+// files onto req.files (mapExpressToAgnostic picks both up)
+app.use(multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024, files: 10 } }).any());
 
 app.use(async (req, res) => {
   const processedResponse = await expressEntryHandler(req, { env, ctx });

@@ -51,6 +51,11 @@ export default {
       case 'assorted':
         response = await serveFileController(env, `assorted/${filename}`);
         break;
+      case 'inquiries':
+        // inquiry attachments (uploaded via the api worker) — linked from
+        // the inquiry email only
+        response = await serveFileController(env, `inquiries/${filename}`);
+        break;
       default:
         response = new Response('not found', { status: 404 });
     }

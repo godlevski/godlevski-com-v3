@@ -16,6 +16,12 @@ export interface SqliteDatabase {
   batch?(statements: SqlStatement[]): Promise<unknown[]>;
 }
 
+// the object-storage surface controllers may assume — structurally satisfied
+// by cloudflare's R2Bucket binding and the local filesystem shim
+export interface ObjectBucket {
+  put(key: string, value: Uint8Array | ArrayBuffer | string): Promise<unknown>;
+}
+
 // the baseline bindings shape every platform entry injects — cloudflare
 // bindings (D1Database satisfies SqliteDatabase structurally) or the express
 // runner's locally-backed equivalents; anything extra rides the index signature
@@ -29,6 +35,15 @@ export interface AgnosticEnv {
 // narrows the agnostic runtime carrier back to the platform's bindings
 export const getRuntime = <Env = AgnosticEnv>(event: AgnosticEvent): WorkerRuntime<Env> =>
   event.runtime as WorkerRuntime<Env>;
+
+// an object bucket binding by name, platform-blind (R2 or local shim)
+export const getObjectBucket = (event: AgnosticEvent, name: string): ObjectBucket => {
+  const bucket = (getRuntime<Record<string, unknown>>(event)?.env || {})[name] as ObjectBucket | undefined;
+  if (!bucket || typeof bucket.put !== 'function') {
+    throw new Error(`no bucket '${name}' on event.runtime.env — the platform entry must inject an R2 binding or shim`);
+  }
+  return bucket;
+};
 
 // plain string var off the bindings, platform-blind
 export const getEnvVar = (event: AgnosticEvent, name: string): string | undefined => {

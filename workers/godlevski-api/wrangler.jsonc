@@ -10,6 +10,15 @@
   // scripts/push-secrets.sh. This file declares bindings only.
   // (wrangler dev parity path reads .dev.vars — gitignored.)
 
+  // inquiry attachments land here (inquiries/<subfolder>/...), served by
+  // the files worker
+  "r2_buckets": [
+    {
+      "binding": "FILES",
+      "bucket_name": "godlevski-files"
+    }
+  ],
+
   // sqlite locally (miniflare), D1 remotely — same binding either way
   "d1_databases": [
     {

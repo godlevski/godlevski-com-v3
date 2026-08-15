@@ -10,7 +10,8 @@
     "./classes": "./classes/index.ts",
     "./helpers": "./helpers/index.ts",
     "./helpers/*": "./helpers/*.ts",
-    "./d1Shim": "./d1Shim/index.ts"
+    "./d1Shim": "./d1Shim/index.ts",
+    "./r2Shim": "./r2Shim/index.ts"
   },
   "scripts": {
     "lint": "tsc --noEmit"

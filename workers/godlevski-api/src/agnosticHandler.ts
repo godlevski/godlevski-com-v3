@@ -10,6 +10,7 @@ import { tagsIndexGetController } from './controllers/tagsIndexGetController';
 import { slidesGetController } from './controllers/slidesGetController';
 import { helloRouter } from './routers/helloRouter';
 import { emailRouter } from './routers/emailRouter';
+import { inquiryPostController } from './controllers/inquiryPostController';
 
 // this is a platform agnostic handler entry point
 // all events are mapped from the corresponding platform
@@ -36,6 +37,10 @@ export const agnosticHandler = async (event: AgnosticEvent): Promise<AgnosticOut
         break;
       case 'email':
         response = await emailRouter(event);
+        break;
+      case 'inquiry':
+        if (event.method !== 'POST') throw new HttpError('method not allowed', { statusCode: 405 });
+        response = await inquiryPostController(event);
         break;
       case 'hello':
         response = await helloRouter(event);

@@ -241,14 +241,16 @@ export default () => {
       
       console.error('Error sending inquiry:', error, error.response, error.response);
 
-      if(error.response.status == 401){
+      if(error.response && error.response.status == 401){
         networkMessage.current = "Your email verification token has expired, please resubmit";
         networkMessageTimestamp.current = new Date();
 
         setTokenState('expired');
         setUnverified();
-        return;
       }
+      // any failure must NOT fall through to the success path
+      setPageState(new Date());
+      return;
     }
 
     // forward to success page on success

@@ -1,4 +1,4 @@
-import { AgnosticEvent } from './AgnosticEvent';
+import { AgnosticEvent, AgnosticFile } from './AgnosticEvent';
 import { base64urlDecode } from '../helpers/base64url';
 
 // minimal structural runtime carrier — keeps this package free of
@@ -57,10 +57,30 @@ export const mapWorkerToAgnostic = async <Env = Record<string, any>>(
     b64Query = base64urlDecode(b64Param);
   }
 
-  // parse body
-  // TODO: consider multipart form data support
+  // parse body — multipart/form-data (fields + files) or json/text
   let parsedBody: Record<string, any> | null = null;
-  if (request.body) {
+  let files: Array<AgnosticFile> | undefined;
+  const contentType = request.headers.get('content-type') || '';
+  if (request.body && contentType.includes('multipart/form-data')) {
+    parsedBody = {};
+    files = [];
+    const form = await request.formData();
+    // structural file type — lib DOM and workers-types disagree on FormData
+    type FormFile = { name: string; type: string; size: number; arrayBuffer(): Promise<ArrayBuffer> };
+    for (const [field, value] of form.entries() as Iterable<[string, string | FormFile]>) {
+      if (typeof value === 'string') {
+        parsedBody[field] = value;
+      } else {
+        files.push({
+          field,
+          filename: value.name,
+          type: value.type,
+          size: value.size,
+          data: new Uint8Array(await value.arrayBuffer()),
+        });
+      }
+    }
+  } else if (request.body) {
     const raw = await request.text();
     try {
       parsedBody = raw ? JSON.parse(raw) : null;
@@ -81,6 +101,7 @@ export const mapWorkerToAgnostic = async <Env = Record<string, any>>(
     query: mappedQuery,
     b64Query,
     body: parsedBody as Record<string, any>,
+    files,
     runtime,
   };
 };

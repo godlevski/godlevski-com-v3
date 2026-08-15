@@ -1,5 +1,5 @@
 import type { Request } from 'express';
-import { AgnosticEvent } from './AgnosticEvent';
+import { AgnosticEvent, AgnosticFile } from './AgnosticEvent';
 import { base64urlDecode } from '../helpers/base64url';
 
 /*
@@ -33,6 +33,18 @@ export const mapExpressToAgnostic = (req: Request, runtime?: unknown): AgnosticE
     headers[name] = Array.isArray(value) ? value.join(',') : (value || '');
   });
 
+  // multer (memoryStorage, .any()) leaves uploads on req.files
+  const multerFiles = (req as any).files;
+  const files: Array<AgnosticFile> | undefined = Array.isArray(multerFiles)
+    ? multerFiles.map((file: any) => ({
+        field: file.fieldname,
+        filename: file.originalname,
+        type: file.mimetype,
+        size: file.size,
+        data: new Uint8Array(file.buffer),
+      }))
+    : undefined;
+
   return {
     uid: crypto.randomUUID(),
     ip: req.ip || '',
@@ -45,6 +57,7 @@ export const mapExpressToAgnostic = (req: Request, runtime?: unknown): AgnosticE
     query: mappedQuery,
     b64Query,
     body: parsedBody,
+    files,
     runtime,
   };
 };
