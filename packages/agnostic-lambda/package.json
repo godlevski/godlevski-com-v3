@@ -1,0 +1,23 @@
+{
+  "name": "@godlevski/agnostic-lambda",
+  "version": "1.0.0",
+  "description": "tools for agnostic express and server(less) request handling",
+  "author": "Dmitriy Godlevski",
+  "license": "MIT",
+  "private": true,
+  "exports": {
+    "./event": "./event/index.ts",
+    "./classes": "./classes/index.ts",
+    "./helpers": "./helpers/index.ts"
+  },
+  "scripts": {
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "typescript": "^5.9.2"
+  }
+}

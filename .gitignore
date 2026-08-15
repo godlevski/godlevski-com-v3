@@ -1,0 +1,18 @@
+# deps
+node_modules/
+
+# builds
+build/
+dist/
+
+# wrangler local state (miniflare sqlite, cache)
+.wrangler/
+.dev.vars
+
+# env
+.env.local
+.env.*.local
+
+# misc
+.DS_Store
+*.log

@@ -1,0 +1,27 @@
+{
+  "name": "godlevski",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev --env-mode ${ENV_MODE:-development}",
+    "build": "rsbuild build --env-mode ${ENV_MODE:-production}",
+    "build:dev": "ENV_MODE=development pnpm build",
+    "build:prod": "ENV_MODE=production pnpm build",
+    "preview": "rsbuild preview",
+    "lint": "tsc --noEmit",
+    "clear-cache": "rm -rf node_modules/.cache"
+  },
+  "dependencies": {
+    "@godlevski/schemas": "workspace:*",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.6.14",
+    "@rsbuild/plugin-react": "^1.4.2",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.9.2"
+  }
+}

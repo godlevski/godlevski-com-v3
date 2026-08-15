@@ -1,0 +1,14 @@
+packages:
+  - "frontend/*"
+  - "workers/*"
+  - "packages/*"
+
+autoInstallPeers: true
+strictPeerDependencies: false
+
+overrides:
+  typescript: 5.9.2
+
+allowBuilds:
+  core-js: false
+  esbuild: true

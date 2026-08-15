@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "godlevski-r2",
+  "main": "index.ts",
+  "compatibility_date": "2026-08-01",
+
+  "r2_buckets": [
+    {
+      "binding": "ASSETS",
+      "bucket_name": "godlevski-web"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+}

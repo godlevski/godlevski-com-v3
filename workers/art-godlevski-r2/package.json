@@ -1,0 +1,21 @@
+{
+  "name": "worker-art-godlevski-r2",
+  "version": "1.0.0",
+  "description": "static serving worker for art.godlevski.com — react build out of R2, image resizing to come",
+  "author": "Dmitriy Godlevski",
+  "license": "MIT",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "dev": "wrangler dev --port 4500",
+    "deploy:worker": "wrangler deploy",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@godlevski/r2-static": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250801.0",
+    "typescript": "^5.9.2"
+  }
+}

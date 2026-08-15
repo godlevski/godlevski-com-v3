@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "art-godlevski-r2",
+  "main": "index.ts",
+  "compatibility_date": "2026-08-01",
+
+  "r2_buckets": [
+    {
+      "binding": "ASSETS",
+      "bucket_name": "art-godlevski-web"
+    }
+    // future: separate originals bucket for artwork masters, e.g.
+    // { "binding": "ART_ORIGINALS", "bucket_name": "art-godlevski-originals" }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+}

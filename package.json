@@ -1,0 +1,33 @@
+{
+  "name": "@godlevski/source",
+  "version": "0.0.0",
+  "description": "godlevski.com v3 — cloudflare monorepo (R2 + D1 + Workers)",
+  "author": "Dmitriy Godlevski",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "ENV_MODE=development concurrently --names \"proxy,fe:god,fe:art,wk:api\" --c \"bgWhite,bgBlue,bgMagenta,bgGreen\" \"pnpm tsx watch local-runner.ts\" \"cd frontend/godlevski && pnpm dev\" \"cd frontend/art-godlevski && pnpm dev\" \"cd workers/godlevski-api && pnpm dev\"",
+    "lint": "concurrently --names \"fe:god,fe:art,wk:api,wk:r2,wk:ar2\" --c \"bgBlue,bgMagenta,bgGreen,bgYellow,bgCyan\" \"cd frontend/godlevski && pnpm lint\" \"cd frontend/art-godlevski && pnpm lint\" \"cd workers/godlevski-api && pnpm lint\" \"cd workers/godlevski-r2 && pnpm lint\" \"cd workers/art-godlevski-r2 && pnpm lint\"",
+    "build": "pnpm -r build",
+    "clean-node-modules": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "provision": "bash infra/provision.sh",
+    "db:migrate:local": "cd workers/godlevski-api && pnpm db:migrate:local",
+    "db:migrate:remote": "cd workers/godlevski-api && pnpm db:migrate:remote",
+    "deploy:worker:api": "cd workers/godlevski-api && pnpm deploy:worker",
+    "deploy:worker:r2": "cd workers/godlevski-r2 && pnpm deploy:worker",
+    "deploy:worker:art-r2": "cd workers/art-godlevski-r2 && pnpm deploy:worker",
+    "deploy:fe:godlevski": "cd frontend/godlevski && pnpm build && bash ../../infra/deploy-frontend.sh godlevski",
+    "deploy:fe:art-godlevski": "cd frontend/art-godlevski && pnpm build && bash ../../infra/deploy-frontend.sh art-godlevski"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.14",
+    "chalk": "^5.6.2",
+    "concurrently": "^9.2.1",
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.2"
+  },
+  "packageManager": "pnpm@11.21.0"
+}
