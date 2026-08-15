@@ -1,7 +1,8 @@
 import { defineConfig, loadEnv } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 
-const { publicVars, rawPublicVars, parsed: { PORT, PROXY_PORT, PUBLIC_URL } } = loadEnv({ prefixes: ['PUBLIC_'] });
+const { parsed: { PORT, PROXY_PORT, PUBLIC_URL } } = loadEnv({ prefixes: ['PUBLIC_'] });
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 export default defineConfig({
   plugins: [pluginReact()],
@@ -24,11 +25,14 @@ export default defineConfig({
   },
   source: {
     define: {
-      ...publicVars,
-      'process.env': JSON.stringify(rawPublicVars),
+      // CRA-era code references bare `process` (process && process.env?.NODE_ENV);
+      // most-specific define wins, the bare one backstops the rest
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+      'process.env': JSON.stringify({ NODE_ENV }),
+      'process': JSON.stringify({ env: { NODE_ENV } }),
     },
     entry: {
-      index: './src/index.tsx',
+      index: './src/index.js',
     },
   },
   output: {
@@ -37,5 +41,16 @@ export default defineConfig({
     },
     target: 'web',
     assetPrefix: PUBLIC_URL || '/',
+  },
+  tools: {
+    // CRA allowed JSX inside .js — keep those files as-is (step 2 may rename)
+    swc: {
+      jsc: {
+        parser: {
+          syntax: 'ecmascript',
+          jsx: true,
+        },
+      },
+    },
   },
 });

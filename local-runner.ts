@@ -3,9 +3,10 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { ServerResponse } from 'http';
 import chalk from 'chalk';
 
-// one unified origin per site — /api rides the worker, everything else the
-// rsbuild dev server (ws for HMR)
+// one unified origin per site — /api rides the api worker, /files the files
+// worker, everything else the rsbuild dev server (ws for HMR)
 const WORKER_PORT = 4300;
+const FILES_WORKER_PORT = 4600;
 const SITES = [
   { name: 'godlevski', port: 8080, frontendPort: 4100 },
   { name: 'art-godlevski', port: 8081, frontendPort: 4200 },
@@ -29,6 +30,13 @@ for (const site of SITES) {
     on: { error: proxyErrorHandler(`${site.name}:/api`) }
   }));
 
+  // /files/* -> files worker (keeps /files prefix; worker strips it)
+  app.use('/files', createProxyMiddleware({
+    target: `http://localhost:${FILES_WORKER_PORT}/files`,
+    changeOrigin: true,
+    on: { error: proxyErrorHandler(`${site.name}:/files`) }
+  }));
+
   // everything else -> rsbuild dev server
   app.use('/', createProxyMiddleware({
     target: `http://localhost:${site.frontendPort}`,
@@ -39,7 +47,8 @@ for (const site of SITES) {
 
   app.listen(site.port, () => {
     console.log(chalk.green.bold(`🚀 ${site.name} on http://localhost:${site.port}`));
-    console.log(chalk.cyan(`  📡 /api/* → http://localhost:${WORKER_PORT}/api/*`));
+    console.log(chalk.cyan(`  📡 /api/*   → http://localhost:${WORKER_PORT}/api/*`));
+    console.log(chalk.cyan(`  📡 /files/* → http://localhost:${FILES_WORKER_PORT}/files/*`));
     console.log(chalk.cyan(`  📡 /*    → http://localhost:${site.frontendPort}/*`));
   });
 }

@@ -1,19 +1,18 @@
 import { AgnosticOutput, mapWorkerToAgnostic, mapExpressToAgnostic } from '@godlevski/agnostic-lambda/event';
-import { toWorkerResponse } from '@godlevski/agnostic-lambda/helpers';
+import { toWorkerResponse, AgnosticEnv } from '@godlevski/agnostic-lambda/helpers';
 import type { Request as ExpressRequest } from 'express';
 import { agnosticHandler } from './src/agnosticHandler';
-import { Env } from './src/env';
 
 // *** ENTRIES
 // export entries
-export const workerEntryHandler = async (request: Request, env: Env, ctx: ExecutionContext): Promise<Response> => {
+export const workerEntryHandler = async (request: Request, env: AgnosticEnv, ctx: ExecutionContext): Promise<Response> => {
   const mappedEvent = await mapWorkerToAgnostic(request, { env, ctx });
   return toWorkerResponse(await agnosticHandler(mappedEvent));
 };
-// kept for platform-agnostic parity — lets the same handler run under a plain
-// node/express runner (no cloudflare bindings on event.runtime there)
-export const expressEntryHandler = (request: ExpressRequest): Promise<AgnosticOutput> => {
-  const mappedEvent = mapExpressToAgnostic(request);
+// platform-agnostic parity — the same handler under a plain node/express
+// runner (see test-runner.ts); runtime carries locally-backed bindings
+export const expressEntryHandler = (request: ExpressRequest, runtime?: unknown): Promise<AgnosticOutput> => {
+  const mappedEvent = mapExpressToAgnostic(request, runtime);
   return agnosticHandler(mappedEvent);
 };
 
@@ -21,4 +20,4 @@ export const expressEntryHandler = (request: ExpressRequest): Promise<AgnosticOu
 // cloudflare module worker entry
 export default {
   fetch: workerEntryHandler
-} satisfies ExportedHandler<Env>;
+} satisfies ExportedHandler<AgnosticEnv>;

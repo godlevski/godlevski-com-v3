@@ -3,7 +3,7 @@ export default process && process.env?.NODE_ENV == 'development'
 
 {
   // server links
-  serverBase: '/2000',
+  serverBase: '/api',
 
   //google
 
@@ -29,7 +29,7 @@ export default process && process.env?.NODE_ENV == 'development'
 
 {
   // server links
-  serverBase: '/2000',
+  serverBase: '/api',
 
   //google
 

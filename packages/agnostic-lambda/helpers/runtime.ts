@@ -16,9 +16,25 @@ export interface SqliteDatabase {
   batch?(statements: SqlStatement[]): Promise<unknown[]>;
 }
 
+// the baseline bindings shape every platform entry injects — cloudflare
+// bindings (D1Database satisfies SqliteDatabase structurally) or the express
+// runner's locally-backed equivalents; anything extra rides the index signature
+export interface AgnosticEnv {
+  DB?: SqliteDatabase;
+  OMIT_PATH_PREFIX?: string;
+  SERVICE_NAME?: string;
+  [key: string]: unknown;
+}
+
 // narrows the agnostic runtime carrier back to the platform's bindings
-export const getRuntime = <Env = Record<string, unknown>>(event: AgnosticEvent): WorkerRuntime<Env> =>
+export const getRuntime = <Env = AgnosticEnv>(event: AgnosticEvent): WorkerRuntime<Env> =>
   event.runtime as WorkerRuntime<Env>;
+
+// plain string var off the bindings, platform-blind
+export const getEnvVar = (event: AgnosticEvent, name: string): string | undefined => {
+  const value = (getRuntime<AgnosticEnv>(event)?.env || {})[name];
+  return typeof value === 'string' ? value : undefined;
+};
 
 // the database, wherever it came from: D1 binding (workerd) or local sqlite
 // shim (express test-runner) — both ride in as runtime.env.DB
